@@ -36,6 +36,20 @@ export const SidebarGroup = React.forwardRef<
 
 SidebarGroup.displayName = "SidebarGroup"
 
+export const SidebarGroupLabel = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<"div">
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-sidebar="group-label"
+    className={cn("px-2 text-xs font-semibold text-sidebar-foreground/70", className)}
+    {...props}
+  />
+))
+
+SidebarGroupLabel.displayName = "SidebarGroupLabel"
+
 export const SidebarGroupContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div">

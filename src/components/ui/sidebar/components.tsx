@@ -1,6 +1,6 @@
 import { SidebarBase } from "./components/base"
 import { SidebarTrigger } from "./components/trigger"
-import { SidebarContent, SidebarGroup, SidebarGroupContent } from "./components/content"
+import { SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel } from "./components/content"
 import { SidebarMenuButton } from "./components/menu-button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
@@ -71,6 +71,7 @@ export {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarInput,
   SidebarMenu,
   SidebarMenuItem,
