@@ -78,7 +78,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </Sidebar>
 
         <div className="flex-1">
-          <header className="border-b bg-background p-4">
+          <header className="border-b bg-background p-4 flex items-center justify-between">
             <SidebarTrigger />
           </header>
           <main className="flex-1 p-6 overflow-auto">
