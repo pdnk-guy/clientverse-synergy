@@ -8,32 +8,31 @@ const Settings = () => {
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">настройка оператора</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Настройки оператора</h1>
           <p className="text-muted-foreground">
-            Manage your system preferences and configurations.
+            Управление системными настройками и конфигурациями.
           </p>
         </div>
 
         <Tabs defaultValue="routing" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="routing">Request Routing</TabsTrigger>
-            <TabsTrigger value="preferences">Customer Preferences</TabsTrigger>
-            <TabsTrigger value="access">Access Management</TabsTrigger>
-            <TabsTrigger value="automation">Automation Scripts</TabsTrigger>
+            <TabsTrigger value="routing">Маршрутизация запросов</TabsTrigger>
+            <TabsTrigger value="preferences">Настройки клиентов</TabsTrigger>
+            <TabsTrigger value="access">Управление доступом</TabsTrigger>
+            <TabsTrigger value="automation">Сценарии автоматизации</TabsTrigger>
           </TabsList>
 
           <TabsContent value="routing" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Request Routing Configuration</CardTitle>
+                <CardTitle>Настройка маршрутизации запросов</CardTitle>
                 <CardDescription>
-                  Configure how incoming requests are routed to different departments and employees.
+                  Настройка распределения входящих запросов по отделам и сотрудникам.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4">
-                  {/* Placeholder for routing configuration UI */}
-                  <p className="text-sm text-muted-foreground">Configure your routing rules and preferences here.</p>
+                  <p className="text-sm text-muted-foreground">Настройте правила и предпочтения маршрутизации здесь.</p>
                 </div>
               </CardContent>
             </Card>
@@ -42,15 +41,14 @@ const Settings = () => {
           <TabsContent value="preferences" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Customer Preferences</CardTitle>
+                <CardTitle>Настройки клиентов</CardTitle>
                 <CardDescription>
-                  Manage customer communication preferences and interaction settings.
+                  Управление настройками коммуникации и взаимодействия с клиентами.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4">
-                  {/* Placeholder for customer preferences UI */}
-                  <p className="text-sm text-muted-foreground">Set up customer communication preferences and schedules.</p>
+                  <p className="text-sm text-muted-foreground">Настройте предпочтения коммуникации и расписания клиентов.</p>
                 </div>
               </CardContent>
             </Card>
@@ -59,15 +57,14 @@ const Settings = () => {
           <TabsContent value="access" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Employee Access Management</CardTitle>
+                <CardTitle>Управление доступом сотрудников</CardTitle>
                 <CardDescription>
-                  Control employee access levels and permissions.
+                  Контроль уровней доступа и разрешений сотрудников.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4">
-                  {/* Placeholder for access management UI */}
-                  <p className="text-sm text-muted-foreground">Manage employee roles and permissions here.</p>
+                  <p className="text-sm text-muted-foreground">Управляйте ролями и разрешениями сотрудников здесь.</p>
                 </div>
               </CardContent>
             </Card>
@@ -76,15 +73,14 @@ const Settings = () => {
           <TabsContent value="automation" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Automation Scripts</CardTitle>
+                <CardTitle>Сценарии автоматизации</CardTitle>
                 <CardDescription>
-                  Configure automated responses and scheduling.
+                  Настройка автоматических ответов и планирования.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4">
-                  {/* Placeholder for automation scripts UI */}
-                  <p className="text-sm text-muted-foreground">Set up response templates and automated schedules.</p>
+                  <p className="text-sm text-muted-foreground">Настройте шаблоны ответов и автоматическое расписание.</p>
                 </div>
               </CardContent>
             </Card>

@@ -11,18 +11,18 @@ const Analytics = () => {
 
   // Sample data - replace with real data in production
   const performanceData = [
-    { name: 'Mon', value: 85 },
-    { name: 'Tue', value: 92 },
-    { name: 'Wed', value: 78 },
-    { name: 'Thu', value: 95 },
-    { name: 'Fri', value: 88 },
+    { name: 'Пн', value: 85 },
+    { name: 'Вт', value: 92 },
+    { name: 'Ср', value: 78 },
+    { name: 'Чт', value: 95 },
+    { name: 'Пт', value: 88 },
   ];
 
   const employeePerformance = [
-    { name: 'John', score: 95, color: '#1EAEDB' },
-    { name: 'Sarah', score: 88, color: '#9b87f5' },
-    { name: 'Mike', score: 75, color: '#FEC6A1' },
-    { name: 'Lisa', score: 92, color: '#1EAEDB' },
+    { name: 'Иван', score: 95, color: '#1EAEDB' },
+    { name: 'Мария', score: 88, color: '#9b87f5' },
+    { name: 'Михаил', score: 75, color: '#FEC6A1' },
+    { name: 'Елена', score: 92, color: '#1EAEDB' },
   ];
 
   return (
@@ -32,34 +32,34 @@ const Analytics = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Select value={timeFilter} onValueChange={setTimeFilter}>
             <SelectTrigger>
-              <SelectValue placeholder="Time Period" />
+              <SelectValue placeholder="Период времени" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="7d">Last 7 Days</SelectItem>
-              <SelectItem value="30d">Last 30 Days</SelectItem>
-              <SelectItem value="90d">Last 90 Days</SelectItem>
+              <SelectItem value="7d">Последние 7 дней</SelectItem>
+              <SelectItem value="30d">Последние 30 дней</SelectItem>
+              <SelectItem value="90d">Последние 90 дней</SelectItem>
             </SelectContent>
           </Select>
 
           <Select value={employeeFilter} onValueChange={setEmployeeFilter}>
             <SelectTrigger>
-              <SelectValue placeholder="Employee" />
+              <SelectValue placeholder="Сотрудник" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Employees</SelectItem>
-              <SelectItem value="john">John</SelectItem>
-              <SelectItem value="sarah">Sarah</SelectItem>
+              <SelectItem value="all">Все сотрудники</SelectItem>
+              <SelectItem value="john">Иван</SelectItem>
+              <SelectItem value="sarah">Мария</SelectItem>
             </SelectContent>
           </Select>
 
           <Select value={requestTypeFilter} onValueChange={setRequestTypeFilter}>
             <SelectTrigger>
-              <SelectValue placeholder="Request Type" />
+              <SelectValue placeholder="Тип запроса" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Requests</SelectItem>
-              <SelectItem value="calls">Calls</SelectItem>
-              <SelectItem value="messages">Messages</SelectItem>
+              <SelectItem value="all">Все запросы</SelectItem>
+              <SelectItem value="calls">Звонки</SelectItem>
+              <SelectItem value="messages">Сообщения</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -68,31 +68,31 @@ const Analytics = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Card>
             <CardHeader>
-              <CardTitle>Avg. Processing Time</CardTitle>
+              <CardTitle>Среднее время обработки</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-[#1EAEDB]">2m 30s</div>
-              <p className="text-sm text-muted-foreground">-12% from last week</p>
+              <div className="text-2xl font-bold text-[#1EAEDB]">2м 30с</div>
+              <p className="text-sm text-muted-foreground">-12% с прошлой недели</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Employee Load</CardTitle>
+              <CardTitle>Загрузка сотрудников</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-[#9b87f5]">78%</div>
-              <p className="text-sm text-muted-foreground">+5% from last week</p>
+              <p className="text-sm text-muted-foreground">+5% с прошлой недели</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Conversion Rate</CardTitle>
+              <CardTitle>Коэффициент конверсии</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-[#ea384c]">32%</div>
-              <p className="text-sm text-muted-foreground">+2% from last week</p>
+              <p className="text-sm text-muted-foreground">+2% с прошлой недели</p>
             </CardContent>
           </Card>
         </div>
@@ -100,7 +100,7 @@ const Analytics = () => {
         {/* Performance Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Employee Performance</CardTitle>
+            <CardTitle>Эффективность сотрудников</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -120,7 +120,7 @@ const Analytics = () => {
         {/* Forecast Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Performance Forecast</CardTitle>
+            <CardTitle>Прогноз эффективности</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
