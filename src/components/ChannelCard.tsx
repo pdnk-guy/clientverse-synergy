@@ -24,17 +24,41 @@ const ChannelCard = ({ title, type, activeChats, responseTime }: ChannelCardProp
     }
   };
 
+  const getBackgroundColor = () => {
+    switch (type) {
+      case "telegram":
+        return "bg-[#1EAEDB]"; // Голубой
+      case "whatsapp":
+        return "bg-[#F2FCE2]"; // Зеленый
+      case "phone":
+        return "bg-[#0EA5E9]"; // Синий
+      case "website":
+        return "bg-[#FEF7CD]"; // Желтый
+      default:
+        return "";
+    }
+  };
+
+  const getTextColor = () => {
+    // Для светлых фонов (WhatsApp и Веб-чат) используем темный текст
+    return type === "whatsapp" || type === "website" 
+      ? "text-gray-800" 
+      : "text-white";
+  };
+
   const Icon = getIcon();
+  const bgColor = getBackgroundColor();
+  const textColor = getTextColor();
 
   return (
-    <Card className="hover:shadow-lg transition-shadow">
+    <Card className={`hover:shadow-lg transition-shadow ${bgColor}`}>
       <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <Icon className="h-4 w-4 text-muted-foreground" />
+        <CardTitle className={`text-sm font-medium ${textColor}`}>{title}</CardTitle>
+        <Icon className={`h-4 w-4 ${textColor}`} />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">{activeChats}</div>
-        <p className="text-xs text-muted-foreground">
+        <div className={`text-2xl font-bold ${textColor}`}>{activeChats}</div>
+        <p className={`text-xs ${textColor} opacity-90`}>
           Среднее время ответа: {responseTime}
         </p>
       </CardContent>
