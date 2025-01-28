@@ -46,7 +46,7 @@ const OutgoingCommunications = () => {
       status: "pending",
     };
     setTasks((prev) => [...prev, newTask]);
-    console.log("New task created:", newTask);
+    console.log("Создана новая задача:", newTask);
   };
 
   const handleTaskStatusChange = (taskId: string) => {
@@ -61,31 +61,31 @@ const OutgoingCommunications = () => {
       )
     );
     toast({
-      title: "Task Updated",
-      description: "Task status has been updated successfully",
+      title: "Задача Обновлена",
+      description: "Статус задачи был успешно обновлен",
     });
   };
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
-    console.log("Filters updated:", { ...filters, [key]: value });
+    console.log("Фильтры обновлены:", { ...filters, [key]: value });
   };
 
   return (
     <DashboardLayout>
       <div className="space-y-6">
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-bold">Outgoing Communications</h2>
+          <h2 className="text-2xl font-bold">Исходящие Коммуникации</h2>
           <Button onClick={() => document.getElementById("task-form")?.scrollIntoView()}>
             <MessageSquare className="mr-2 h-4 w-4" />
-            Create New Task
+            Создать Новую Задачу
           </Button>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Filters</CardTitle>
-            <CardDescription>Filter tasks based on customer segments</CardDescription>
+            <CardTitle>Фильтры</CardTitle>
+            <CardDescription>Фильтровать задачи по сегментам клиентов</CardDescription>
           </CardHeader>
           <CardContent className="flex gap-4">
             <Select
@@ -93,12 +93,12 @@ const OutgoingCommunications = () => {
               onValueChange={(value) => handleFilterChange("lastVisit", value)}
             >
               <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Last Visit" />
+                <SelectValue placeholder="Последний Визит" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="30">Last 30 days</SelectItem>
-                <SelectItem value="60">Last 60 days</SelectItem>
-                <SelectItem value="90">Last 90 days</SelectItem>
+                <SelectItem value="30">Последние 30 дней</SelectItem>
+                <SelectItem value="60">Последние 60 дней</SelectItem>
+                <SelectItem value="90">Последние 90 дней</SelectItem>
               </SelectContent>
             </Select>
 
@@ -107,12 +107,12 @@ const OutgoingCommunications = () => {
               onValueChange={(value) => handleFilterChange("carType", value)}
             >
               <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Car Type" />
+                <SelectValue placeholder="Тип Автомобиля" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="sedan">Sedan</SelectItem>
-                <SelectItem value="suv">SUV</SelectItem>
-                <SelectItem value="truck">Truck</SelectItem>
+                <SelectItem value="sedan">Седан</SelectItem>
+                <SelectItem value="suv">Внедорожник</SelectItem>
+                <SelectItem value="truck">Грузовик</SelectItem>
               </SelectContent>
             </Select>
 
@@ -121,12 +121,12 @@ const OutgoingCommunications = () => {
               onValueChange={(value) => handleFilterChange("taskType", value)}
             >
               <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Task Type" />
+                <SelectValue placeholder="Тип Задачи" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="retention">Retention Calls</SelectItem>
-                <SelectItem value="reminder">Reminders</SelectItem>
-                <SelectItem value="promotion">Promotional Offers</SelectItem>
+                <SelectItem value="retention">Звонки по удержанию</SelectItem>
+                <SelectItem value="reminder">Напоминания</SelectItem>
+                <SelectItem value="promotion">Промо-предложения</SelectItem>
               </SelectContent>
             </Select>
           </CardContent>
@@ -136,15 +136,15 @@ const OutgoingCommunications = () => {
           <TabsList>
             <TabsTrigger value="retention">
               <Phone className="mr-2 h-4 w-4" />
-              Retention Calls
+              Звонки по удержанию
             </TabsTrigger>
             <TabsTrigger value="reminders">
               <Calendar className="mr-2 h-4 w-4" />
-              Reminders
+              Напоминания
             </TabsTrigger>
             <TabsTrigger value="promotions">
               <MessageSquare className="mr-2 h-4 w-4" />
-              Promotional Offers
+              Промо-предложения
             </TabsTrigger>
           </TabsList>
 
@@ -173,8 +173,8 @@ const OutgoingCommunications = () => {
 
         <Card id="task-form">
           <CardHeader>
-            <CardTitle>Create New Task</CardTitle>
-            <CardDescription>Add a new communication task</CardDescription>
+            <CardTitle>Создать Новую Задачу</CardTitle>
+            <CardDescription>Добавить новую коммуникационную задачу</CardDescription>
           </CardHeader>
           <CardContent>
             <TaskForm onSubmit={handleCreateTask} />
