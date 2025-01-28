@@ -1,44 +1,92 @@
 import { Link } from "react-router-dom";
 import { Menu, UserSquare2, PhoneCall, PhoneOutgoing, BarChart, Settings2 } from "lucide-react";
+import { 
+  Sidebar, 
+  SidebarContent, 
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton 
+} from "@/components/ui/sidebar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="min-h-screen">
-      <header className="border-b bg-background">
-        <div className="p-4">
-          <h1 className="text-2xl font-bold">Панель оператора</h1>
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full">
+        <Sidebar>
+          <SidebarContent>
+            <div className="p-4">
+              <h1 className="text-2xl font-bold">Панель оператора</h1>
+            </div>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/" className="flex items-center gap-2 text-sm">
+                    <Menu className="h-4 w-4" />
+                    <span>Главный экран</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/customer" className="flex items-center gap-2 text-sm">
+                    <UserSquare2 className="h-4 w-4" />
+                    <span>Карточка клиента</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/incoming-call" className="flex items-center gap-2 text-sm">
+                    <PhoneCall className="h-4 w-4" />
+                    <span>Входящие коммуникации</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/outgoing-communications" className="flex items-center gap-2 text-sm">
+                    <PhoneOutgoing className="h-4 w-4" />
+                    <span>Исходящие коммуникации</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/analytics" className="flex items-center gap-2 text-sm">
+                    <BarChart className="h-4 w-4" />
+                    <span>Аналитика и отчеты</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/settings" className="flex items-center gap-2 text-sm">
+                    <Settings2 className="h-4 w-4" />
+                    <span>настройка оператора</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarContent>
+        </Sidebar>
+
+        <div className="flex-1">
+          <header className="border-b bg-background p-4">
+            <SidebarTrigger />
+          </header>
+          <main className="flex-1 p-6 overflow-auto">
+            {children}
+          </main>
         </div>
-        <nav className="flex items-center gap-6 px-4 pb-2">
-          <Link to="/" className="flex items-center gap-2 text-sm hover:text-primary">
-            <Menu className="h-4 w-4" />
-            <span>Главный экран</span>
-          </Link>
-          <Link to="/customer" className="flex items-center gap-2 text-sm hover:text-primary">
-            <UserSquare2 className="h-4 w-4" />
-            <span>Карточка клиента</span>
-          </Link>
-          <Link to="/incoming-call" className="flex items-center gap-2 text-sm hover:text-primary">
-            <PhoneCall className="h-4 w-4" />
-            <span>Входящие коммуникации</span>
-          </Link>
-          <Link to="/outgoing-communications" className="flex items-center gap-2 text-sm hover:text-primary">
-            <PhoneOutgoing className="h-4 w-4" />
-            <span>Исходящие коммуникации</span>
-          </Link>
-          <Link to="/analytics" className="flex items-center gap-2 text-sm hover:text-primary">
-            <BarChart className="h-4 w-4" />
-            <span>Аналитика и отчеты</span>
-          </Link>
-          <Link to="/settings" className="flex items-center gap-2 text-sm hover:text-primary">
-            <Settings2 className="h-4 w-4" />
-            <span>настройка оператора</span>
-          </Link>
-        </nav>
-      </header>
-      <main className="flex-1 p-6 overflow-auto">
-        {children}
-      </main>
-    </div>
+      </div>
+    </SidebarProvider>
   );
 };
 
