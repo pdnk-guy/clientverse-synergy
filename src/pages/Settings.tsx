@@ -10,20 +10,38 @@ import { Switch } from "@/components/ui/switch";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
+import * as z from "zod";
+
+// Define the form schema
+const formSchema = z.object({
+  autoAssignment: z.boolean(),
+  workloadThreshold: z.string(),
+  responseTimeout: z.string(),
+  priorityRules: z.string(),
+  defaultTemplate: z.string().optional(),
+  role: z.string().optional(),
+  crmApiKey: z.string().optional(),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 const Settings = () => {
   const [activeSection, setActiveSection] = useState("routing");
   const { toast } = useToast();
-  const form = useForm({
+  
+  const form = useForm<FormValues>({
     defaultValues: {
       autoAssignment: true,
       workloadThreshold: "80",
       responseTimeout: "15",
       priorityRules: "standard",
+      defaultTemplate: "",
+      role: "",
+      crmApiKey: "",
     },
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FormValues) => {
     console.log("Settings saved:", data);
     toast({
       title: "Настройки сохранены",
@@ -137,7 +155,7 @@ const Settings = () => {
                       <FormItem>
                         <FormLabel>Шаблон ответа по умолчанию</FormLabel>
                         <FormControl>
-                          <Input type="text" placeholder="Введите шаблон" {...field} />
+                          <Input {...field} placeholder="Введите шаблон" />
                         </FormControl>
                       </FormItem>
                     )}
