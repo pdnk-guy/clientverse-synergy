@@ -1,7 +1,13 @@
 import { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -10,18 +16,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Calendar, Phone, MessageSquare, Filter } from "lucide-react";
+import { Phone, MessageSquare, Calendar } from "lucide-react";
+import TaskForm from "@/components/TaskForm";
+import TaskList from "@/components/TaskList";
+import { useToast } from "@/hooks/use-toast";
 
 interface Task {
   id: string;
-  type: "retention" | "reminder" | "promotion";
+  type: string;
   customerName: string;
   description: string;
   dueDate: string;
@@ -29,42 +31,22 @@ interface Task {
 }
 
 const OutgoingCommunications = () => {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: "1",
-      type: "retention",
-      customerName: "John Doe",
-      description: "Follow up on service satisfaction",
-      dueDate: "2024-03-20",
-      status: "pending",
-    },
-    {
-      id: "2",
-      type: "reminder",
-      customerName: "Jane Smith",
-      description: "Annual maintenance reminder",
-      dueDate: "2024-03-22",
-      status: "pending",
-    },
-    {
-      id: "3",
-      type: "promotion",
-      customerName: "Mike Johnson",
-      description: "Spring service special offer",
-      dueDate: "2024-03-25",
-      status: "pending",
-    },
-  ]);
-
+  const { toast } = useToast();
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [filters, setFilters] = useState({
     lastVisit: "",
     carType: "",
     taskType: "",
   });
 
-  const handleFilterChange = (key: string, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
-    console.log("Filters updated:", { ...filters, [key]: value });
+  const handleCreateTask = (taskData: Omit<Task, "id" | "status">) => {
+    const newTask: Task = {
+      ...taskData,
+      id: Date.now().toString(),
+      status: "pending",
+    };
+    setTasks((prev) => [...prev, newTask]);
+    console.log("New task created:", newTask);
   };
 
   const handleTaskStatusChange = (taskId: string) => {
@@ -78,6 +60,15 @@ const OutgoingCommunications = () => {
           : task
       )
     );
+    toast({
+      title: "Task Updated",
+      description: "Task status has been updated successfully",
+    });
+  };
+
+  const handleFilterChange = (key: string, value: string) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+    console.log("Filters updated:", { ...filters, [key]: value });
   };
 
   return (
@@ -85,21 +76,20 @@ const OutgoingCommunications = () => {
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold">Outgoing Communications</h2>
-          <Button>
+          <Button onClick={() => document.getElementById("task-form")?.scrollIntoView()}>
             <MessageSquare className="mr-2 h-4 w-4" />
-            Create New Message
+            Create New Task
           </Button>
         </div>
 
         <Card>
           <CardHeader>
             <CardTitle>Filters</CardTitle>
-            <CardDescription>
-              Filter tasks based on customer segments
-            </CardDescription>
+            <CardDescription>Filter tasks based on customer segments</CardDescription>
           </CardHeader>
           <CardContent className="flex gap-4">
             <Select
+              value={filters.lastVisit}
               onValueChange={(value) => handleFilterChange("lastVisit", value)}
             >
               <SelectTrigger className="w-[200px]">
@@ -113,6 +103,7 @@ const OutgoingCommunications = () => {
             </Select>
 
             <Select
+              value={filters.carType}
               onValueChange={(value) => handleFilterChange("carType", value)}
             >
               <SelectTrigger className="w-[200px]">
@@ -126,6 +117,7 @@ const OutgoingCommunications = () => {
             </Select>
 
             <Select
+              value={filters.taskType}
               onValueChange={(value) => handleFilterChange("taskType", value)}
             >
               <SelectTrigger className="w-[200px]">
@@ -156,53 +148,38 @@ const OutgoingCommunications = () => {
             </TabsTrigger>
           </TabsList>
 
-          {["retention", "reminders", "promotions"].map((tab) => (
-            <TabsContent key={tab} value={tab}>
-              <Card>
-                <CardHeader>
-                  <CardTitle className="capitalize">{tab} Tasks</CardTitle>
-                  <CardDescription>
-                    Manage your {tab} communication tasks
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {tasks
-                      .filter((task) => task.type === tab.replace("s", ""))
-                      .map((task) => (
-                        <div
-                          key={task.id}
-                          className="flex items-center justify-between p-4 border rounded-lg"
-                        >
-                          <div>
-                            <h3 className="font-medium">{task.customerName}</h3>
-                            <p className="text-sm text-gray-500">
-                              {task.description}
-                            </p>
-                            <p className="text-sm text-gray-500">
-                              Due: {task.dueDate}
-                            </p>
-                          </div>
-                          <Button
-                            variant={
-                              task.status === "completed"
-                                ? "secondary"
-                                : "default"
-                            }
-                            onClick={() => handleTaskStatusChange(task.id)}
-                          >
-                            {task.status === "completed"
-                              ? "Completed"
-                              : "Mark Complete"}
-                          </Button>
-                        </div>
-                      ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          ))}
+          <TabsContent value="retention">
+            <TaskList
+              tasks={tasks}
+              onStatusChange={handleTaskStatusChange}
+              type="retention"
+            />
+          </TabsContent>
+          <TabsContent value="reminders">
+            <TaskList
+              tasks={tasks}
+              onStatusChange={handleTaskStatusChange}
+              type="reminder"
+            />
+          </TabsContent>
+          <TabsContent value="promotions">
+            <TaskList
+              tasks={tasks}
+              onStatusChange={handleTaskStatusChange}
+              type="promotion"
+            />
+          </TabsContent>
         </Tabs>
+
+        <Card id="task-form">
+          <CardHeader>
+            <CardTitle>Create New Task</CardTitle>
+            <CardDescription>Add a new communication task</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <TaskForm onSubmit={handleCreateTask} />
+          </CardContent>
+        </Card>
       </div>
     </DashboardLayout>
   );
