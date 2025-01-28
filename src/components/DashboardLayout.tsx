@@ -1,9 +1,20 @@
 import { Link } from "react-router-dom";
-import { Menu, UserSquare2, PhoneCall, PhoneOutgoing, BarChart, Settings2, Moon, Sun, Bot } from "lucide-react";
+import { Menu, UserSquare2, PhoneCall, PhoneOutgoing, BarChart, Settings2, Moon, Sun, Bot, User, LogOut } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { theme, toggleTheme } = useTheme();
+
+  const handleLogout = () => {
+    console.log("Logging out...");
+    // Add actual logout logic here when needed
+  };
 
   return (
     <div className="min-h-screen dark:bg-gray-900">
@@ -60,6 +71,22 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                 <Bot className="h-4 w-4" />
                 <span>Бот Борис</span>
               </Link>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-md">
+                  <User className="h-5 w-5" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <div className="px-4 py-3 border-b">
+                    <p className="text-sm font-medium">Гайдаржи Александр</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Product owner</p>
+                  </div>
+                  <DropdownMenuItem onClick={handleLogout} className="text-red-600 dark:text-red-400 cursor-pointer">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Выйти</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </nav>
