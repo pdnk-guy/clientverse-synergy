@@ -5,7 +5,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
-        <Sidebar>
+        <Sidebar className="border-r">
           <SidebarContent>
             <SidebarGroup>
               <SidebarGroupLabel>Navigation</SidebarGroupLabel>
@@ -65,12 +65,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </SidebarContent>
         </Sidebar>
         
-        <main className="flex-1 p-8">
-          <div className="flex items-center justify-between mb-8">
+        <main className="flex-1 overflow-auto">
+          <div className="flex items-center justify-between p-4 border-b">
             <SidebarTrigger />
-            <h1 className="text-3xl font-bold">Communication Hub</h1>
+            <h1 className="text-2xl font-bold">Communication Hub</h1>
           </div>
-          {children}
+          <div className="p-6">
+            {children}
+          </div>
         </main>
       </div>
     </SidebarProvider>
