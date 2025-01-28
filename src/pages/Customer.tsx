@@ -20,7 +20,7 @@ const Customer = () => {
     <DashboardLayout>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Personal Information */}
-        <Card className="col-span-full">
+        <Card className="col-span-full bg-[#D3E4FD]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <User className="h-5 w-5" />
