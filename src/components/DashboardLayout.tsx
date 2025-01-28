@@ -8,11 +8,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <nav className="container mx-auto p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <img 
-                src="/boris-hoff-logo.png" 
-                alt="Boris Hoff Logo" 
-                className="h-8"
-              />
               <h1 className="text-2xl font-bold">Панель оператора</h1>
             </div>
             <div className="flex items-center gap-6">
