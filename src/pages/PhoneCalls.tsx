@@ -1,22 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, UserSquare2 } from "lucide-react";
 import { CallsList } from "@/components/phone/CallsList";
 import { ScriptsPanel } from "@/components/phone/ScriptsPanel";
-import { Card } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { ClientInfoCard } from "@/components/phone/ClientInfoCard";
+import { PageHeader } from "@/components/phone/PageHeader";
 
 interface Call {
   id: string;
@@ -92,22 +79,12 @@ const mockClient: Client = {
 };
 
 const PhoneCalls = () => {
-  const navigate = useNavigate();
   const [selectedCall, setSelectedCall] = useState<Call | null>(mockCalls[0]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
     <DashboardLayout>
-      <div className="mb-4">
-        <Button 
-          variant="ghost" 
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Назад
-        </Button>
-      </div>
+      <PageHeader />
       <div className="grid grid-cols-12 gap-4 h-[calc(100vh-8rem)]">
         <CallsList 
           calls={mockCalls}
@@ -115,70 +92,11 @@ const PhoneCalls = () => {
           onCallSelect={setSelectedCall}
         />
         <ScriptsPanel scripts={mockScripts} />
-        <Card className="col-span-3 p-4">
-          <h2 className="text-lg font-semibold mb-4">Информация о клиенте</h2>
-          <ScrollArea className="h-[calc(100vh-12rem)]">
-            {selectedCall && (
-              <div className="space-y-4">
-                <div>
-                  <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-                    <DrawerTrigger asChild>
-                      <Button variant="ghost" className="w-full flex items-center gap-2 justify-start p-2 hover:bg-accent rounded-lg">
-                        <UserSquare2 className="h-8 w-8" />
-                        <h3 className="font-medium">{mockClient.name}</h3>
-                      </Button>
-                    </DrawerTrigger>
-                    <DrawerContent>
-                      <div className="mx-auto w-full max-w-sm">
-                        <DrawerHeader>
-                          <DrawerTitle>Информация о клиенте</DrawerTitle>
-                          <DrawerDescription>Детальная информация</DrawerDescription>
-                        </DrawerHeader>
-                        <div className="p-4 space-y-4">
-                          <div className="space-y-2 text-sm">
-                            <p><span className="font-medium">Телефон:</span> {mockClient.phone}</p>
-                            <p><span className="font-medium">Email:</span> {mockClient.email}</p>
-                            <p><span className="font-medium">Последний визит:</span> {mockClient.lastVisit}</p>
-                            <p><span className="font-medium">Автомобиль:</span> {mockClient.carModel}</p>
-                          </div>
-                          <div>
-                            <h4 className="font-medium mb-2">История обслуживания:</h4>
-                            <ul className="space-y-1 text-sm">
-                              {mockClient.serviceHistory.map((service, index) => (
-                                <li key={index}>{service}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-                        <div className="p-4">
-                          <DrawerClose asChild>
-                            <Button variant="outline" className="w-full">
-                              Закрыть
-                            </Button>
-                          </DrawerClose>
-                        </div>
-                      </div>
-                    </DrawerContent>
-                  </Drawer>
-                  <div className="space-y-2 text-sm mt-4">
-                    <p><span className="font-medium">Телефон:</span> {mockClient.phone}</p>
-                    <p><span className="font-medium">Email:</span> {mockClient.email}</p>
-                    <p><span className="font-medium">Последний визит:</span> {mockClient.lastVisit}</p>
-                    <p><span className="font-medium">Автомобиль:</span> {mockClient.carModel}</p>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-medium mb-2">История обслуживания:</h4>
-                  <ul className="space-y-1 text-sm">
-                    {mockClient.serviceHistory.map((service, index) => (
-                      <li key={index}>{service}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
-          </ScrollArea>
-        </Card>
+        <ClientInfoCard
+          client={mockClient}
+          isDrawerOpen={isDrawerOpen}
+          onDrawerOpenChange={setIsDrawerOpen}
+        />
       </div>
     </DashboardLayout>
   );
