@@ -3,7 +3,6 @@ import ChannelCard from "@/components/ChannelCard";
 import RequestFilters from "@/components/RequestFilters";
 import RequestList from "@/components/RequestList";
 import QuickActions from "@/components/QuickActions";
-import WorkloadIndicator from "@/components/WorkloadIndicator";
 
 const Index = () => {
   const channels = [
@@ -35,7 +34,6 @@ const Index = () => {
 
   return (
     <DashboardLayout>
-      <WorkloadIndicator />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
         {channels.map((channel) => (
           <ChannelCard
