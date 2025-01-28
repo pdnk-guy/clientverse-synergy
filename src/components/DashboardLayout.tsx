@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <nav className="flex items-center gap-6 px-4 pb-2">
           <Link to="/" className="flex items-center gap-2 text-sm hover:text-primary">
             <Menu className="h-4 w-4" />
-            <span>Dashboard</span>
+            <span>Главный экран</span>
           </Link>
           <Link to="/customer" className="flex items-center gap-2 text-sm hover:text-primary">
             <UserSquare2 className="h-4 w-4" />
