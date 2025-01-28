@@ -4,7 +4,7 @@ import { SidebarProvider, SidebarTrigger, Sidebar, SidebarContent, SidebarGroup,
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="min-h-screen flex w-full">
+      <div className="flex min-h-screen w-full">
         <Sidebar className="border-r" variant="sidebar" collapsible="icon">
           <SidebarContent>
             <SidebarGroup>
@@ -64,13 +64,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             </SidebarGroup>
           </SidebarContent>
         </Sidebar>
-        
-        <div className="flex-1 flex flex-col min-h-screen">
+
+        <div className="flex-1 flex flex-col">
           <header className="flex items-center justify-between p-4 border-b bg-background">
             <SidebarTrigger />
             <h1 className="text-2xl font-bold">Communication Hub</h1>
           </header>
-          <main className="flex-1 overflow-auto p-6">
+          <main className="flex-1 p-6 overflow-auto">
             {children}
           </main>
         </div>
