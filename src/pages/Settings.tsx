@@ -3,14 +3,13 @@ import DashboardLayout from "@/components/DashboardLayout";
 import SettingsMenu from "@/components/settings/SettingsMenu";
 import HelpPanel from "@/components/settings/HelpPanel";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Form, FormField, FormItem, FormLabel, FormControl } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
 
 const Settings = () => {
   const [activeSection, setActiveSection] = useState("routing");
@@ -32,21 +31,10 @@ const Settings = () => {
     });
   };
 
-  return (
-    <DashboardLayout>
-      <div className="flex h-[calc(100vh-4rem)] gap-6 p-6">
-        {/* Левая панель - меню настроек */}
-        <SettingsMenu activeSection={activeSection} onSectionChange={setActiveSection} />
-
-        {/* Центральная часть - основной контент */}
-        <div className="flex-1 space-y-6 overflow-y-auto">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Настройки оператора</h1>
-            <p className="text-muted-foreground">
-              Управление системными настройками и конфигурациями
-            </p>
-          </div>
-
+  const renderContent = () => {
+    switch (activeSection) {
+      case "routing":
+        return (
           <Card>
             <CardHeader>
               <CardTitle>Настройка маршрутизации запросов</CardTitle>
@@ -79,7 +67,6 @@ const Settings = () => {
                       </FormItem>
                     )}
                   />
-
                   <FormField
                     control={form.control}
                     name="workloadThreshold"
@@ -92,7 +79,6 @@ const Settings = () => {
                       </FormItem>
                     )}
                   />
-
                   <FormField
                     control={form.control}
                     name="responseTimeout"
@@ -105,7 +91,6 @@ const Settings = () => {
                       </FormItem>
                     )}
                   />
-
                   <FormField
                     control={form.control}
                     name="priorityRules"
@@ -127,15 +112,138 @@ const Settings = () => {
                       </FormItem>
                     )}
                   />
-
                   <Button type="submit">Сохранить настройки</Button>
                 </form>
               </Form>
             </CardContent>
           </Card>
-        </div>
+        );
+      case "scripts":
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>Настройка сценариев</CardTitle>
+              <CardDescription>
+                Управление автоматическими сценариями и шаблонами
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Form {...form}>
+                <form className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="defaultTemplate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Шаблон ответа по умолчанию</FormLabel>
+                        <FormControl>
+                          <Input type="text" placeholder="Введите шаблон" {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit">Сохранить сценарии</Button>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+        );
+      case "access":
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>Управление доступом</CardTitle>
+              <CardDescription>
+                Настройка прав доступа для сотрудников
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Form {...form}>
+                <form className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="role"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Роль пользователя</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Выберите роль" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="admin">Администратор</SelectItem>
+                            <SelectItem value="operator">Оператор</SelectItem>
+                            <SelectItem value="supervisor">Супервайзер</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit">Сохранить права доступа</Button>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+        );
+      case "integrations":
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>Интеграции</CardTitle>
+              <CardDescription>
+                Настройка интеграций с внешними системами
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Form {...form}>
+                <form className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="crmApiKey"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>API ключ CRM</FormLabel>
+                        <FormControl>
+                          <Input type="text" placeholder="Введите API ключ" {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit">Сохранить интеграции</Button>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+        );
+      default:
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>Выберите раздел настроек</CardTitle>
+              <CardDescription>
+                Выберите раздел настроек в меню слева для его конфигурации
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        );
+    }
+  };
 
-        {/* Правая панель - справка */}
+  return (
+    <DashboardLayout>
+      <div className="flex h-[calc(100vh-4rem)] gap-6 p-6">
+        <SettingsMenu activeSection={activeSection} onSectionChange={setActiveSection} />
+        <div className="flex-1 space-y-6 overflow-y-auto">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Настройки оператора</h1>
+            <p className="text-muted-foreground">
+              Управление системными настройками и конфигурациями
+            </p>
+          </div>
+          {renderContent()}
+        </div>
         <HelpPanel section={activeSection} />
       </div>
     </DashboardLayout>
