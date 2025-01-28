@@ -55,6 +55,13 @@ const Analytics = () => {
     }
   ];
 
+  // Updated colors for rankings
+  const rankingColors = {
+    first: "bg-amber-100 border-amber-300",    // Gold
+    second: "bg-gray-100 border-gray-300",     // Silver
+    third: "bg-orange-100 border-orange-300",  // Bronze
+  };
+
   return (
     <DashboardLayout>
       <div className="space-y-6">
@@ -105,10 +112,25 @@ const Analytics = () => {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {topEmployees.map((employee, index) => (
-                <Card key={index} className="border-2">
+                <Card 
+                  key={index} 
+                  className={cn(
+                    "border-2",
+                    index === 0 && rankingColors.first,
+                    index === 1 && rankingColors.second,
+                    index === 2 && rankingColors.third
+                  )}
+                >
                   <CardHeader>
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <span className="text-2xl font-bold text-primary">#{index + 1}</span>
+                      <span className={cn(
+                        "text-2xl font-bold",
+                        index === 0 && "text-amber-500",
+                        index === 1 && "text-gray-500",
+                        index === 2 && "text-orange-700"
+                      )}>
+                        #{index + 1}
+                      </span>
                       {employee.name}
                     </CardTitle>
                   </CardHeader>
