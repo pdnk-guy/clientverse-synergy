@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import DashboardLayout from "@/components/DashboardLayout";
 import ServiceCalculator from "@/components/ServiceCalculator";
 import DealershipCalendar from "@/components/DealershipCalendar";
+import QuickActions from "@/components/QuickActions";
+import Objections from "@/components/Objections";
 
 const IncomingCall = () => {
   const templateAnswers = [
@@ -17,9 +19,9 @@ const IncomingCall = () => {
     <DashboardLayout>
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          <Card className="col-span-1 md:col-span-6 p-6">
-            <h2 className="text-2xl font-semibold mb-4">Детали Запроса</h2>
-            <div className="space-y-4">
+          <Card className="col-span-1 md:col-span-4 p-4">
+            <h2 className="text-lg font-semibold mb-4">Детали Запроса</h2>
+            <div className="space-y-2">
               <div className="flex justify-between">
                 <span className="font-medium">Источник:</span>
                 <span>Телефонный звонок</span>
@@ -30,7 +32,7 @@ const IncomingCall = () => {
               </div>
               <div>
                 <span className="font-medium">Запрос:</span>
-                <p className="mt-2 text-gray-600">
+                <p className="mt-1 text-sm text-gray-600">
                   Запрос клиента о доступности услуг и ценах
                 </p>
               </div>
@@ -75,6 +77,9 @@ const IncomingCall = () => {
             </div>
           </Card>
         </div>
+
+        <QuickActions />
+        <Objections />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ServiceCalculator />

@@ -18,17 +18,17 @@ const dealerships = [
 ];
 
 const timeSlots = [
-  "09:00",
-  "10:00",
-  "11:00",
-  "12:00",
-  "13:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-  "18:00",
+  "09:00", "10:00", "11:00", "12:00", "13:00",
+  "14:00", "15:00", "16:00", "17:00", "18:00",
 ];
+
+// Имитация данных о загруженности дней
+const getDayAvailability = (date: Date) => {
+  const day = date.getDate();
+  if (day % 3 === 0) return "high"; // Красный
+  if (day % 2 === 0) return "medium"; // Желтый
+  return "low"; // Зеленый
+};
 
 const DealershipCalendar = () => {
   const { toast } = useToast();
@@ -53,6 +53,26 @@ const DealershipCalendar = () => {
       } на ${date.toLocaleDateString()} ${selectedTime}`,
     });
   };
+
+  // Модифицированный компонент календаря с индикацией загруженности
+  const modifiedCalendar = (
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      className="rounded-md border"
+      modifiers={{
+        high: (date) => getDayAvailability(date) === "high",
+        medium: (date) => getDayAvailability(date) === "medium",
+        low: (date) => getDayAvailability(date) === "low",
+      }}
+      modifiersStyles={{
+        high: { backgroundColor: "#fee2e2" }, // Красный фон
+        medium: { backgroundColor: "#fef3c7" }, // Желтый фон
+        low: { backgroundColor: "#dcfce7" }, // Зеленый фон
+      }}
+    />
+  );
 
   return (
     <Card className="p-6">
@@ -98,12 +118,21 @@ const DealershipCalendar = () => {
           </div>
         </div>
         <div>
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            className="rounded-md border"
-          />
+          {modifiedCalendar}
+          <div className="mt-4 flex gap-4 text-sm">
+            <div className="flex items-center">
+              <div className="w-3 h-3 rounded-full bg-green-100 mr-2"></div>
+              <span>Много мест</span>
+            </div>
+            <div className="flex items-center">
+              <div className="w-3 h-3 rounded-full bg-yellow-100 mr-2"></div>
+              <span>Немного мест</span>
+            </div>
+            <div className="flex items-center">
+              <div className="w-3 h-3 rounded-full bg-red-100 mr-2"></div>
+              <span>Мало мест</span>
+            </div>
+          </div>
         </div>
       </div>
       <Button onClick={handleBooking} className="w-full mt-6">
