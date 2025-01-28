@@ -7,28 +7,28 @@ import QuickActions from "@/components/QuickActions";
 const Index = () => {
   const channels = [
     {
-      title: "Telegram Bot",
+      title: "Телеграм Бот",
       type: "telegram" as const,
       activeChats: 24,
-      responseTime: "2m 30s"
+      responseTime: "2м 30с"
     },
     {
       title: "WhatsApp",
       type: "whatsapp" as const,
       activeChats: 15,
-      responseTime: "3m 45s"
+      responseTime: "3м 45с"
     },
     {
-      title: "Phone Support",
+      title: "Телефонная поддержка",
       type: "phone" as const,
       activeChats: 8,
-      responseTime: "1m 15s"
+      responseTime: "1м 15с"
     },
     {
-      title: "Website Chat",
+      title: "Веб-чат",
       type: "website" as const,
       activeChats: 32,
-      responseTime: "4m 00s"
+      responseTime: "4м 00с"
     }
   ];
 

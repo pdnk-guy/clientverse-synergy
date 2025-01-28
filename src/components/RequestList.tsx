@@ -6,22 +6,22 @@ const requests = [
     id: 1,
     source: "telegram",
     status: "new",
-    time: "10:30 AM",
-    description: "Need help with account access",
+    time: "10:30",
+    description: "Нужна помощь с доступом к аккаунту",
   },
   {
     id: 2,
     source: "whatsapp",
     status: "in-progress",
-    time: "11:15 AM",
-    description: "Question about subscription renewal",
+    time: "11:15",
+    description: "Вопрос о продлении подписки",
   },
   {
     id: 3,
     source: "phone",
     status: "new",
-    time: "11:45 AM",
-    description: "Technical support required",
+    time: "11:45",
+    description: "Требуется техническая поддержка",
   },
 ];
 
@@ -42,9 +42,9 @@ const getStatusBadge = (status: string) => {
   const baseClasses = "px-2 py-1 rounded-full text-xs font-medium";
   switch (status) {
     case "new":
-      return <span className={`${baseClasses} bg-green-100 text-green-800`}>New</span>;
+      return <span className={`${baseClasses} bg-green-100 text-green-800`}>Новый</span>;
     case "in-progress":
-      return <span className={`${baseClasses} bg-blue-100 text-blue-800`}>In Progress</span>;
+      return <span className={`${baseClasses} bg-blue-100 text-blue-800`}>В обработке</span>;
     default:
       return <span className={`${baseClasses} bg-gray-100 text-gray-800`}>{status}</span>;
   }
@@ -56,10 +56,10 @@ const RequestList = () => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Source</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Time</TableHead>
-            <TableHead>Description</TableHead>
+            <TableHead>Источник</TableHead>
+            <TableHead>Статус</TableHead>
+            <TableHead>Время</TableHead>
+            <TableHead>Описание</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

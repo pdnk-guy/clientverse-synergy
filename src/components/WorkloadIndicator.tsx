@@ -2,18 +2,18 @@ import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
 const data = [
-  { time: "9 AM", value: 30 },
-  { time: "10 AM", value: 45 },
-  { time: "11 AM", value: 65 },
-  { time: "12 PM", value: 80 },
-  { time: "1 PM", value: 70 },
-  { time: "2 PM", value: 55 },
+  { time: "9:00", value: 30 },
+  { time: "10:00", value: 45 },
+  { time: "11:00", value: 65 },
+  { time: "12:00", value: 80 },
+  { time: "13:00", value: 70 },
+  { time: "14:00", value: 55 },
 ];
 
 const WorkloadIndicator = () => {
   return (
     <div className="p-4 border-b">
-      <h3 className="font-semibold mb-2">Operator Workload</h3>
+      <h3 className="font-semibold mb-2">Загруженность оператора</h3>
       <div className="h-[100px]">
         <ChartContainer
           config={{
