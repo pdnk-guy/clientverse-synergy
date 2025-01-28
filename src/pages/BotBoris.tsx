@@ -1,0 +1,105 @@
+import DashboardLayout from "@/components/DashboardLayout";
+import { Card } from "@/components/ui/card";
+import {
+  PieChart,
+  Pie,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  Cell,
+} from "recharts";
+
+const BotBoris = () => {
+  const statsData = [
+    { label: "Всего звонков проанализировал", value: 23901, color: "#c2e6c8" },
+    { label: "Из них: Нет КД", value: 8083, color: "#ffd7cc" },
+    { label: "Из них: Непрофильные звонки", value: 536, color: "#e6e9f0" },
+    { label: "Из них: Негативных эмоций", value: 736, color: "#cce0ff" },
+  ];
+
+  const pieData1 = [
+    { name: "Запись на сервис", value: 47.7, color: "#e6e6fa" },
+    { name: "Перезвонить", value: 15.8, color: "#ffe4b5" },
+    { name: "Нет КД", value: 34.6, color: "#ffb6c1" },
+    { name: "Нет ответа МТК", value: 1.9, color: "#dc143c" },
+  ];
+
+  const pieData2 = [
+    { name: "Узнать стоимость", value: 30.8, color: "#ffa07a" },
+    { name: "Не устраивает дата", value: 30.4, color: "#98fb98" },
+    { name: "Нет нужной запчасти", value: 24.7, color: "#87ceeb" },
+    { name: "Другое", value: 8.0, color: "#dda0dd" },
+    { name: "Нет ответа МТК", value: 6.1, color: "#dc143c" },
+  ];
+
+  return (
+    <DashboardLayout>
+      <div className="space-y-8">
+        <div className="grid grid-cols-4 gap-4">
+          {statsData.map((stat) => (
+            <Card
+              key={stat.label}
+              className="p-6"
+              style={{ backgroundColor: stat.color }}
+            >
+              <h3 className="text-sm font-medium text-gray-600">{stat.label}</h3>
+              <p className="text-3xl font-bold mt-2">{stat.value}</p>
+            </Card>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-2 gap-8">
+          <Card className="p-6">
+            <h3 className="text-lg font-medium mb-4">
+              Доля КД дрегированный - Входящие звонки
+            </h3>
+            <PieChart width={400} height={300}>
+              <Pie
+                data={pieData1}
+                cx={200}
+                cy={150}
+                innerRadius={0}
+                outerRadius={100}
+                paddingAngle={0}
+                dataKey="value"
+              >
+                {pieData1.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </Card>
+
+          <Card className="p-6">
+            <h3 className="text-lg font-medium mb-4">Причины отказа %</h3>
+            <PieChart width={400} height={300}>
+              <Pie
+                data={pieData2}
+                cx={200}
+                cy={150}
+                innerRadius={0}
+                outerRadius={100}
+                paddingAngle={0}
+                dataKey="value"
+              >
+                {pieData2.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </Card>
+        </div>
+      </div>
+    </DashboardLayout>
+  );
+};
+
+export default BotBoris;

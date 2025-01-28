@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Menu, UserSquare2, PhoneCall, PhoneOutgoing, BarChart, Settings2, Moon, Sun } from "lucide-react";
+import { Menu, UserSquare2, PhoneCall, PhoneOutgoing, BarChart, Settings2, Moon, Sun, Bot } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -54,6 +54,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               <Link to="/settings" className="flex items-center gap-2 text-sm hover:text-primary dark:text-gray-300">
                 <Settings2 className="h-4 w-4" />
                 <span>настройка оператора</span>
+              </Link>
+
+              <Link to="/bot-boris" className="flex items-center gap-2 text-sm hover:text-primary dark:text-gray-300">
+                <Bot className="h-4 w-4" />
+                <span>Бот Борис</span>
               </Link>
             </div>
           </div>
