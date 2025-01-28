@@ -4,6 +4,16 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Phone, Clock, UserSquare2, PhoneOff, PhoneForwarded } from "lucide-react";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
 
 interface Call {
   id: string;
@@ -110,6 +120,7 @@ const getStatusIcon = (status: Call["status"]) => {
 
 const PhoneCalls = () => {
   const [selectedCall, setSelectedCall] = useState<Call | null>(mockCalls[0]);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
     <DashboardLayout>
@@ -163,11 +174,46 @@ const PhoneCalls = () => {
             {selectedCall && (
               <div className="space-y-4">
                 <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <UserSquare2 className="h-8 w-8" />
-                    <h3 className="font-medium">{mockClient.name}</h3>
-                  </div>
-                  <div className="space-y-2 text-sm">
+                  <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+                    <DrawerTrigger asChild>
+                      <Button variant="ghost" className="w-full flex items-center gap-2 justify-start p-2 hover:bg-accent rounded-lg">
+                        <UserSquare2 className="h-8 w-8" />
+                        <h3 className="font-medium">{mockClient.name}</h3>
+                      </Button>
+                    </DrawerTrigger>
+                    <DrawerContent>
+                      <div className="mx-auto w-full max-w-sm">
+                        <DrawerHeader>
+                          <DrawerTitle>Информация о клиенте</DrawerTitle>
+                          <DrawerDescription>Детальная информация</DrawerDescription>
+                        </DrawerHeader>
+                        <div className="p-4 space-y-4">
+                          <div className="space-y-2 text-sm">
+                            <p><span className="font-medium">Телефон:</span> {mockClient.phone}</p>
+                            <p><span className="font-medium">Email:</span> {mockClient.email}</p>
+                            <p><span className="font-medium">Последний визит:</span> {mockClient.lastVisit}</p>
+                            <p><span className="font-medium">Автомобиль:</span> {mockClient.carModel}</p>
+                          </div>
+                          <div>
+                            <h4 className="font-medium mb-2">История обслуживания:</h4>
+                            <ul className="space-y-1 text-sm">
+                              {mockClient.serviceHistory.map((service, index) => (
+                                <li key={index}>{service}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                        <div className="p-4">
+                          <DrawerClose asChild>
+                            <Button variant="outline" className="w-full">
+                              Закрыть
+                            </Button>
+                          </DrawerClose>
+                        </div>
+                      </div>
+                    </DrawerContent>
+                  </Drawer>
+                  <div className="space-y-2 text-sm mt-4">
                     <p><span className="font-medium">Телефон:</span> {mockClient.phone}</p>
                     <p><span className="font-medium">Email:</span> {mockClient.email}</p>
                     <p><span className="font-medium">Последний визит:</span> {mockClient.lastVisit}</p>
