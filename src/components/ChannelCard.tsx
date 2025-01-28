@@ -53,6 +53,8 @@ const ChannelCard = ({ title, type, activeChats, responseTime }: ChannelCardProp
       navigate("/telegram-messages");
     } else if (type === "whatsapp") {
       navigate("/whatsapp-messages");
+    } else if (type === "phone") {
+      navigate("/phone-calls");
     }
   };
 

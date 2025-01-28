@@ -9,6 +9,7 @@ import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import TelegramMessages from "./pages/TelegramMessages";
 import WhatsAppMessages from "./pages/WhatsAppMessages";
+import PhoneCalls from "./pages/PhoneCalls";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/settings" element={<Settings />} />
           <Route path="/telegram-messages" element={<TelegramMessages />} />
           <Route path="/whatsapp-messages" element={<WhatsAppMessages />} />
+          <Route path="/phone-calls" element={<PhoneCalls />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
