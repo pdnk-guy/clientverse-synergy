@@ -5,14 +5,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Trophy } from "lucide-react";
-import { cn } from "@/lib/utils";  // Add this import
+import { cn } from "@/lib/utils";
 
 const Analytics = () => {
   const [timeFilter, setTimeFilter] = useState("7d");
   const [employeeFilter, setEmployeeFilter] = useState("all");
   const [requestTypeFilter, setRequestTypeFilter] = useState("all");
 
-  // Sample data - replace with real data in production
   const performanceData = [
     { name: 'Пн', value: 85 },
     { name: 'Вт', value: 92 },
@@ -157,7 +156,6 @@ const Analytics = () => {
           </CardContent>
         </Card>
 
-        {/* Key Indicators */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Card>
             <CardHeader>
