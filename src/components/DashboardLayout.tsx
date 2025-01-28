@@ -1,4 +1,4 @@
-import { Menu, UserSquare2, PhoneCall, PhoneOutgoing, BarChart } from "lucide-react";
+import { Menu, UserSquare2, PhoneCall, PhoneOutgoing, BarChart, Settings2 } from "lucide-react";
 import { SidebarProvider, SidebarTrigger, Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -48,6 +48,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                       <a href="/analytics">
                         <BarChart className="h-4 w-4" />
                         <span>Analytics & Reports</span>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <a href="/settings">
+                        <Settings2 className="h-4 w-4" />
+                        <span>Settings</span>
                       </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

@@ -4,6 +4,7 @@ import Index from "./pages/Index";
 import Customer from "./pages/Customer";
 import IncomingCall from "./pages/IncomingCall";
 import Analytics from "./pages/Analytics";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ const App = () => (
           <Route path="/customer" element={<Customer />} />
           <Route path="/incoming-call" element={<IncomingCall />} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
