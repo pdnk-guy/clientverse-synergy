@@ -3,6 +3,8 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Trophy } from "lucide-react";
 
 const Analytics = () => {
   const [timeFilter, setTimeFilter] = useState("7d");
@@ -23,6 +25,34 @@ const Analytics = () => {
     { name: 'Мария', score: 88, color: '#9b87f5' },
     { name: 'Михаил', score: 75, color: '#FEC6A1' },
     { name: 'Елена', score: 92, color: '#1EAEDB' },
+  ];
+
+  // Top 3 employees data
+  const topEmployees = [
+    {
+      name: "Иванов Сергей",
+      metrics: [
+        { name: "Среднее время обработки", value: "1м 45с" },
+        { name: "Конверсия", value: "42%" },
+        { name: "Продажи", value: "28 авто" }
+      ]
+    },
+    {
+      name: "Петрова Анна",
+      metrics: [
+        { name: "Запись на сервис", value: "145 записей" },
+        { name: "Среднее время обработки", value: "2м 10с" },
+        { name: "Конверсия", value: "38%" }
+      ]
+    },
+    {
+      name: "Сидоров Максим",
+      metrics: [
+        { name: "Продажи", value: "25 авто" },
+        { name: "Конверсия", value: "35%" },
+        { name: "Запись на сервис", value: "132 записей" }
+      ]
+    }
   ];
 
   return (
@@ -63,6 +93,46 @@ const Analytics = () => {
             </SelectContent>
           </Select>
         </div>
+
+        {/* Top 3 Employees Section */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Trophy className="h-5 w-5 text-yellow-500" />
+              Топ 3 лучших сотрудника
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {topEmployees.map((employee, index) => (
+                <Card key={index} className="border-2">
+                  <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <span className="text-2xl font-bold text-primary">#{index + 1}</span>
+                      {employee.name}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <Table>
+                      <TableBody>
+                        {employee.metrics.map((metric, mIndex) => (
+                          <TableRow key={mIndex}>
+                            <TableCell className="text-sm text-muted-foreground">
+                              {metric.name}
+                            </TableCell>
+                            <TableCell className="text-sm font-medium">
+                              {metric.value}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Key Indicators */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
