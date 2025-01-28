@@ -3,175 +3,120 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Smile, Paperclip, Mic, Send } from "lucide-react";
+import { MessageSquare, Calendar, User, Check, Filter, FileText, RefreshCcw } from "lucide-react";
 
 interface Message {
   id: number;
-  text: string;
-  sender: "user" | "operator";
-  timestamp: string;
+  date: string;
+  sender: string;
+  recipient: string;
+  content: string;
+  messageCount: number;
+  status?: string;
+  isOperator?: boolean;
 }
-
-interface Client {
-  id: number;
-  name: string;
-  topic: string;
-  lastMessage: string;
-  tags: string[];
-}
-
-const mockClients: Client[] = [
-  {
-    id: 1,
-    name: "Иван Петров",
-    topic: "Техническая поддержка",
-    lastMessage: "У меня проблема с доступом",
-    tags: ["Срочно", "Поддержка"]
-  },
-  {
-    id: 2,
-    name: "Анна Сидорова",
-    topic: "Оплата услуг",
-    lastMessage: "Как я могу оплатить подписку?",
-    tags: ["Оплата"]
-  }
-];
 
 const mockMessages: Message[] = [
   {
     id: 1,
-    text: "Здравствуйте! У меня проблема с доступом к аккаунту",
-    sender: "user",
-    timestamp: "10:30"
+    date: "24.01.2025",
+    sender: "Александр Палыч",
+    recipient: "Еремина Алена (eremina_a)",
+    content: "Добрый день.",
+    messageCount: 16,
+    status: "Диалог №255235 завершён"
   },
   {
     id: 2,
-    text: "Здравствуйте! Я помогу вам решить эту проблему. Пожалуйста, опишите подробнее, что происходит.",
-    sender: "operator",
-    timestamp: "10:31"
+    date: "27.01.2025",
+    sender: "Максим Перцев",
+    recipient: "Еремина Алена (eremina_a)",
+    content: "Bmw 520d, 2018 год. 89251410603 БорисХоф восток.",
+    messageCount: 8
+  },
+  {
+    id: 3,
+    date: "27.01.2025",
+    sender: "Оксана Казначеева",
+    recipient: "Еремина Алена (eremina_a)",
+    content: "Черри k769pp799",
+    messageCount: 9,
+    status: "Диалог №256464 завершён"
   }
 ];
 
 const TelegramMessages = () => {
-  const [selectedClient, setSelectedClient] = useState<Client | null>(mockClients[0]);
-  const [newMessage, setNewMessage] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedMessage, setSelectedMessage] = useState<Message | null>(mockMessages[0]);
 
   return (
     <DashboardLayout>
       <div className="grid grid-cols-12 gap-4 h-[calc(100vh-120px)]">
-        {/* Список обращений */}
-        <div className="col-span-3 bg-white rounded-lg shadow overflow-y-auto">
-          <div className="p-4">
-            <h2 className="text-lg font-semibold mb-4">Обращения</h2>
-            {mockClients.map((client) => (
-              <div
-                key={client.id}
-                className={`p-3 rounded-lg mb-2 cursor-pointer hover:bg-gray-50 ${
-                  selectedClient?.id === client.id ? "bg-blue-50" : ""
-                }`}
-                onClick={() => setSelectedClient(client)}
-              >
-                <div className="font-medium">{client.name}</div>
-                <div className="text-sm text-gray-600">{client.topic}</div>
-                <div className="text-xs text-gray-500 mt-1">{client.lastMessage}</div>
-                <div className="flex gap-2 mt-2">
-                  {client.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+        {/* Верхняя панель с фильтрами */}
+        <div className="col-span-12 bg-white rounded-lg shadow p-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-600">
+              Дата отправки сообщения: последние 7 дней
+            </span>
+          </div>
+          <div className="flex items-center gap-4">
+            <Input
+              placeholder="Введите поисковый запрос или добавьте фильтры"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-96"
+            />
+            <Button variant="outline" size="icon">
+              <Filter className="h-4 w-4" />
+            </Button>
+            <Button variant="outline" size="icon">
+              <FileText className="h-4 w-4" />
+            </Button>
+            <Button variant="outline" size="icon">
+              <RefreshCcw className="h-4 w-4" />
+            </Button>
           </div>
         </div>
 
-        {/* Чат */}
-        <div className="col-span-6 bg-white rounded-lg shadow flex flex-col">
-          <div className="p-4 border-b">
-            <h2 className="text-lg font-semibold">
-              {selectedClient ? selectedClient.name : "Выберите чат"}
-            </h2>
-          </div>
-          
-          <div className="flex-1 overflow-y-auto p-4">
+        {/* Список сообщений */}
+        <div className="col-span-12 bg-white rounded-lg shadow">
+          <div className="grid grid-cols-12 gap-4">
             {mockMessages.map((message) => (
               <div
                 key={message.id}
-                className={`mb-4 flex ${
-                  message.sender === "operator" ? "justify-end" : "justify-start"
-                }`}
+                className="col-span-4 p-4 border rounded-lg cursor-pointer hover:bg-gray-50"
+                onClick={() => setSelectedMessage(message)}
               >
-                <div
-                  className={`max-w-[70%] rounded-lg p-3 ${
-                    message.sender === "operator"
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-100"
-                  }`}
-                >
-                  <div className="text-sm">{message.text}</div>
-                  <div className="text-xs mt-1 opacity-70">{message.timestamp}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="p-4 border-t">
-            <div className="flex gap-2 items-center">
-              <Button variant="ghost" size="icon">
-                <Paperclip className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Mic className="h-5 w-5" />
-              </Button>
-              <Input
-                placeholder="Введите сообщение..."
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                className="flex-1"
-              />
-              <Button variant="ghost" size="icon">
-                <Smile className="h-5 w-5" />
-              </Button>
-              <Button>
-                <Send className="h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Информация о клиенте */}
-        <div className="col-span-3 bg-white rounded-lg shadow">
-          <div className="p-4">
-            <h2 className="text-lg font-semibold mb-4">Информация о клиенте</h2>
-            {selectedClient && (
-              <div className="space-y-4">
-                <div>
-                  <label className="text-sm text-gray-600">Имя</label>
-                  <div className="font-medium">{selectedClient.name}</div>
-                </div>
-                <div>
-                  <label className="text-sm text-gray-600">Тема обращения</label>
-                  <div className="font-medium">{selectedClient.topic}</div>
-                </div>
-                <div>
-                  <label className="text-sm text-gray-600">Теги</label>
-                  <div className="flex gap-2 mt-1">
-                    {selectedClient.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                <div className="flex justify-between items-start mb-2">
+                  <div className="flex items-center gap-2">
+                    <MessageSquare className="h-4 w-4 text-blue-500" />
+                    <span className="font-medium">{message.sender}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="text-orange-500">{message.messageCount}</span>
                   </div>
                 </div>
+
+                <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                  <Calendar className="h-4 w-4" />
+                  <span>{message.date}</span>
+                </div>
+
+                <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                  <User className="h-4 w-4" />
+                  <span>{message.recipient}</span>
+                </div>
+
+                <p className="text-sm text-gray-700 mb-2">{message.content}</p>
+
+                {message.status && (
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <Check className="h-4 w-4" />
+                    <span>{message.status}</span>
+                  </div>
+                )}
               </div>
-            )}
+            ))}
           </div>
         </div>
       </div>
