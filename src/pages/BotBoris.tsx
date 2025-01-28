@@ -72,6 +72,36 @@ const BotBoris = () => {
     { month: "Июн", value: 94 },
   ];
 
+  const locationData = [
+    {
+      location: "Внуково",
+      data: [
+        { name: "Запись на сервис", value: 45.2, color: "#e6e6fa" },
+        { name: "Перезвонить", value: 13.8, color: "#ffe4b5" },
+        { name: "Нет КД", value: 38.5, color: "#ffb6c1" },
+        { name: "Нет ответа МТК", value: 2.5, color: "#dc143c" },
+      ]
+    },
+    {
+      location: "Юг Архангельский",
+      data: [
+        { name: "Запись на сервис", value: 42.0, color: "#e6e6fa" },
+        { name: "Перезвонить", value: 15.0, color: "#ffe4b5" },
+        { name: "Нет КД", value: 40.0, color: "#ffb6c1" },
+        { name: "Нет ответа МТК", value: 3.0, color: "#dc143c" },
+      ]
+    },
+    {
+      location: "Юг Квитка",
+      data: [
+        { name: "Запись на сервис", value: 45.3, color: "#e6e6fa" },
+        { name: "Перезвонить", value: 16.1, color: "#ffe4b5" },
+        { name: "Нет КД", value: 36.7, color: "#ffb6c1" },
+        { name: "Нет ответа МТК", value: 1.9, color: "#dc143c" },
+      ]
+    }
+  ];
+
   return (
     <DashboardLayout>
       <div className="space-y-8">
@@ -87,6 +117,35 @@ const BotBoris = () => {
             </Card>
           ))}
         </div>
+
+        <Card className="p-6">
+          <h3 className="text-lg font-medium mb-4">Сравнение КД по локациям</h3>
+          <div className="grid grid-cols-3 gap-6">
+            {locationData.map((location) => (
+              <div key={location.location} className="space-y-4">
+                <h4 className="text-base font-medium">{location.location}</h4>
+                <p className="text-sm text-gray-600">Доля КД агрегированный</p>
+                <PieChart width={300} height={300}>
+                  <Pie
+                    data={location.data}
+                    cx={150}
+                    cy={150}
+                    innerRadius={0}
+                    outerRadius={100}
+                    paddingAngle={0}
+                    dataKey="value"
+                  >
+                    {location.data.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </div>
+            ))}
+          </div>
+        </Card>
 
         <div className="grid grid-cols-2 gap-8">
           <Card className="p-6">
