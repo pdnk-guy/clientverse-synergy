@@ -33,8 +33,8 @@ const TaskForm = ({ onSubmit }: TaskFormProps) => {
     e.preventDefault();
     if (!taskData.type || !taskData.customerName || !taskData.description || !taskData.dueDate) {
       toast({
-        title: "Error",
-        description: "Please fill in all fields",
+        title: "Ошибка",
+        description: "Пожалуйста, заполните все поля",
         variant: "destructive",
       });
       return;
@@ -42,8 +42,8 @@ const TaskForm = ({ onSubmit }: TaskFormProps) => {
     onSubmit(taskData);
     setTaskData({ type: "", customerName: "", description: "", dueDate: "" });
     toast({
-      title: "Success",
-      description: "Task created successfully",
+      title: "Успех",
+      description: "Задача успешно создана",
     });
   };
 
@@ -54,23 +54,23 @@ const TaskForm = ({ onSubmit }: TaskFormProps) => {
         onValueChange={(value) => setTaskData({ ...taskData, type: value })}
       >
         <SelectTrigger>
-          <SelectValue placeholder="Select task type" />
+          <SelectValue placeholder="Выберите тип задачи" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="retention">Retention Call</SelectItem>
-          <SelectItem value="reminder">Reminder</SelectItem>
-          <SelectItem value="promotion">Promotional Offer</SelectItem>
+          <SelectItem value="retention">Звонок по удержанию</SelectItem>
+          <SelectItem value="reminder">Напоминание</SelectItem>
+          <SelectItem value="promotion">Промо-предложение</SelectItem>
         </SelectContent>
       </Select>
 
       <Input
-        placeholder="Customer Name"
+        placeholder="Имя клиента"
         value={taskData.customerName}
         onChange={(e) => setTaskData({ ...taskData, customerName: e.target.value })}
       />
 
       <Textarea
-        placeholder="Task Description"
+        placeholder="Описание задачи"
         value={taskData.description}
         onChange={(e) => setTaskData({ ...taskData, description: e.target.value })}
       />
@@ -81,7 +81,7 @@ const TaskForm = ({ onSubmit }: TaskFormProps) => {
         onChange={(e) => setTaskData({ ...taskData, dueDate: e.target.value })}
       />
 
-      <Button type="submit">Create Task</Button>
+      <Button type="submit">Создать задачу</Button>
     </form>
   );
 };
