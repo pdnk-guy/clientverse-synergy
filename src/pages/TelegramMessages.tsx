@@ -130,7 +130,7 @@ const TelegramMessages = () => {
             {mockMessages.map((message) => (
               <div
                 key={message.id}
-                className="col-span-4 p-4 border rounded-lg cursor-pointer hover:bg-gray-50"
+                className="col-span-4 p-4 border rounded-lg cursor-pointer hover:bg-[#1EAEDB]/10 bg-[#1EAEDB]/5"
                 onClick={() => handleMessageClick(message)}
               >
                 <div className="flex justify-between items-start mb-2">
