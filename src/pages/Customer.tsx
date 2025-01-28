@@ -110,7 +110,11 @@ const Customer = () => {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
-              <div className="text-sm text-muted-foreground">VIN</div>
+              <div className="text-sm text-muted-foreground">Марка</div>
+              <div>BMW</div>
+              <div className="text-sm text-muted-foreground mt-4">Модель</div>
+              <div>X5</div>
+              <div className="text-sm text-muted-foreground mt-4">VIN</div>
               <div>1HGCM82633A123456</div>
               <div className="text-sm text-muted-foreground mt-4">Гос. номер</div>
               <div>А123БВ777</div>
