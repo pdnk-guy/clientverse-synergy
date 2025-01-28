@@ -96,7 +96,9 @@ const Index = () => {
         </div>
 
         <div className="space-y-6">
-          <WorkloadIndicator />
+          <div className="border rounded-lg overflow-hidden">
+            <WorkloadIndicator />
+          </div>
           <div className="border rounded-lg p-4">
             <h2 className="text-lg font-semibold mb-4">Задачи на сегодня</h2>
             <TaskList
