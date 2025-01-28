@@ -42,7 +42,7 @@ const TaskList = ({ tasks, onStatusChange, type }: TaskListProps) => {
               variant={task.status === "completed" ? "secondary" : "default"}
               onClick={() => onStatusChange(task.id)}
             >
-              {task.status === "completed" ? "Completed" : "Mark Complete"}
+              {task.status === "completed" ? "Выполнено" : "Отметить как выполненное"}
             </Button>
           </CardContent>
         </Card>
