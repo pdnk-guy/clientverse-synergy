@@ -4,7 +4,9 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { MessageSquare, Calendar, User, Check, Filter, FileText, RefreshCcw, ExternalLink } from "lucide-react";
+import { MessageSquare, Calendar, User, Check, Filter, FileText, RefreshCcw, Tag } from "lucide-react";
+import { MessageInput } from "@/components/MessageInput";
+import { ChatMessages } from "@/components/ChatMessages";
 
 interface Message {
   id: number;
@@ -21,6 +23,7 @@ interface Message {
   callTouchId?: string;
   userId?: string;
   source?: string;
+  tags?: string[];
 }
 
 const mockMessages: Message[] = [
@@ -36,7 +39,8 @@ const mockMessages: Message[] = [
     dialogNumber: "255235",
     callTouchId: "dguegnux5czdmku64yile2u9t8m",
     userId: "459346622",
-    source: "Бот"
+    source: "Бот",
+    tags: ["Запись на ТО", "BMW"]
   },
   {
     id: 2,
@@ -57,6 +61,30 @@ const mockMessages: Message[] = [
   }
 ];
 
+const mockChatMessages = [
+  {
+    id: 1,
+    sender: "Александр Палыч",
+    content: "Добрый день, хотел бы записаться на ТО для BMW X5",
+    timestamp: "10:30",
+    isOperator: false
+  },
+  {
+    id: 2,
+    sender: "Оператор",
+    content: "Здравствуйте! Конечно, я помогу вам записаться. Подскажите, пожалуйста, год выпуска вашего автомобиля?",
+    timestamp: "10:32",
+    isOperator: true
+  },
+  {
+    id: 3,
+    sender: "Александр Палыч",
+    content: "2021",
+    timestamp: "10:33",
+    isOperator: false
+  }
+];
+
 const TelegramMessages = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
@@ -70,7 +98,7 @@ const TelegramMessages = () => {
   return (
     <DashboardLayout>
       <div className="grid grid-cols-12 gap-4 h-[calc(100vh-120px)]">
-        {/* Верхняя панель с фильтрами */}
+        {/* Top filter panel */}
         <div className="col-span-12 bg-white rounded-lg shadow p-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600">
@@ -96,7 +124,7 @@ const TelegramMessages = () => {
           </div>
         </div>
 
-        {/* Список сообщений */}
+        {/* Messages list */}
         <div className="col-span-12 bg-white rounded-lg shadow">
           <div className="grid grid-cols-12 gap-4">
             {mockMessages.map((message) => (
@@ -125,6 +153,17 @@ const TelegramMessages = () => {
                   <span>{message.recipient}</span>
                 </div>
 
+                {message.tags && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {message.tags.map((tag) => (
+                      <div key={tag} className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded text-xs">
+                        <Tag className="h-3 w-3" />
+                        {tag}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 <p className="text-sm text-gray-700 mb-2">{message.content}</p>
 
                 {message.status && (
@@ -138,102 +177,63 @@ const TelegramMessages = () => {
           </div>
         </div>
 
-        {/* Side Panel */}
+        {/* Side Panel with Chat */}
         <Sheet open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
-          <SheetContent side="right" className="w-[400px] sm:w-[540px]">
-            <SheetHeader>
-              <SheetTitle>Информация о диалоге</SheetTitle>
-            </SheetHeader>
-            
-            {selectedMessage && (
-              <div className="mt-6 space-y-6">
-                {/* Contact Section */}
+          <SheetContent side="right" className="w-[900px] sm:w-[1000px]">
+            <div className="flex h-full">
+              {/* Chat Section */}
+              <div className="flex-1 flex flex-col border-r">
+                <SheetHeader>
+                  <SheetTitle>Чат с {selectedMessage?.sender}</SheetTitle>
+                </SheetHeader>
+                <ChatMessages messages={mockChatMessages} />
+                <MessageInput />
+              </div>
+
+              {/* Client Info Section */}
+              <div className="w-[300px] p-4 space-y-6">
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-medium text-gray-500">Контакт</h3>
-                    <Button variant="ghost" size="sm">
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
-                  </div>
+                  <h3 className="text-sm font-medium text-gray-500">Контакт</h3>
                   <div className="space-y-2">
-                    <p className="text-sm font-medium">{selectedMessage.sender}</p>
-                    <p className="text-sm text-gray-600">{selectedMessage.phone}</p>
-                    <p className="text-sm text-gray-600">{selectedMessage.email}</p>
+                    <p className="text-sm font-medium">{selectedMessage?.sender}</p>
+                    <p className="text-sm text-gray-600">{selectedMessage?.phone}</p>
+                    <p className="text-sm text-gray-600">{selectedMessage?.email}</p>
                   </div>
                 </div>
 
-                {/* Segmentation Section */}
-                <div className="space-y-4">
-                  <h3 className="text-sm font-medium text-gray-500">Сегментация</h3>
-                  <div className="flex gap-2">
-                    {Array(7).fill(null).map((_, index) => (
-                      <div
-                        key={index}
-                        className="w-6 h-6 rounded border border-gray-200"
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Additional Fields Section */}
-                <div className="space-y-4">
-                  <h3 className="text-sm font-medium text-gray-500">Дополнительные поля</h3>
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">Категории для комментария</span>
-                      <Button variant="ghost" size="sm" className="text-blue-500">
-                        Добавить новое поле
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* CallTouch Section */}
-                <div className="space-y-4">
-                  <h3 className="text-sm font-medium text-gray-500">CallTouch</h3>
-                  <div className="space-y-2">
-                    <p className="text-sm text-gray-600">
-                      Заявка #{selectedMessage.callTouchId}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Information Section */}
                 <div className="space-y-4">
                   <h3 className="text-sm font-medium text-gray-500">Информация</h3>
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Диалог</span>
-                      <span className="text-sm">{selectedMessage.dialogNumber}</span>
+                      <span className="text-sm">{selectedMessage?.dialogNumber}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Источник</span>
-                      <span className="text-sm">{selectedMessage.source}</span>
+                      <span className="text-sm">{selectedMessage?.source}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">User ID</span>
-                      <span className="text-sm">{selectedMessage.userId}</span>
+                      <span className="text-sm">{selectedMessage?.userId}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="grid grid-cols-2 gap-4 pt-4">
-                  <Button variant="outline" className="w-full">
-                    В приложение оператора
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Обновить
-                  </Button>
-                  <Button variant="outline" className="w-full text-red-500 hover:text-red-600">
-                    Удалить чат
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Забанить
-                  </Button>
-                </div>
+                {selectedMessage?.tags && (
+                  <div className="space-y-4">
+                    <h3 className="text-sm font-medium text-gray-500">Теги</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedMessage.tags.map((tag) => (
+                        <div key={tag} className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded text-xs">
+                          <Tag className="h-3 w-3" />
+                          {tag}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </SheetContent>
         </Sheet>
       </div>
