@@ -36,6 +36,42 @@ const BotBoris = () => {
     { name: "Нет ответа МТК", value: 6.1, color: "#dc143c" },
   ];
 
+  const additionalStats = [
+    {
+      label: "Средняя длительность разговора",
+      value: "4:31",
+      color: "#F2FCE2",
+      subtext: "минут",
+    },
+    {
+      label: "Среднее время ожидания",
+      value: "0:42",
+      color: "#FEF7CD",
+      subtext: "секунд",
+    },
+    {
+      label: "Пропущенные звонки",
+      value: "12%",
+      color: "#FEC6A1",
+      subtext: "от общего количества",
+    },
+    {
+      label: "Успешные коммуникации",
+      value: "89%",
+      color: "#E5DEFF",
+      subtext: "положительный результат",
+    },
+  ];
+
+  const performanceData = [
+    { month: "Янв", value: 85 },
+    { month: "Фев", value: 88 },
+    { month: "Мар", value: 92 },
+    { month: "Апр", value: 87 },
+    { month: "Май", value: 91 },
+    { month: "Июн", value: 94 },
+  ];
+
   return (
     <DashboardLayout>
       <div className="space-y-8">
@@ -97,6 +133,31 @@ const BotBoris = () => {
             </PieChart>
           </Card>
         </div>
+
+        <div className="grid grid-cols-4 gap-4">
+          {additionalStats.map((stat) => (
+            <Card
+              key={stat.label}
+              className="p-6"
+              style={{ backgroundColor: stat.color }}
+            >
+              <h3 className="text-sm font-medium text-gray-600">{stat.label}</h3>
+              <p className="text-3xl font-bold mt-2">{stat.value}</p>
+              <p className="text-sm text-gray-500 mt-1">{stat.subtext}</p>
+            </Card>
+          ))}
+        </div>
+
+        <Card className="p-6">
+          <h3 className="text-lg font-medium mb-4">Эффективность работы бота</h3>
+          <BarChart width={1000} height={300} data={performanceData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="value" fill="#8B5CF6" />
+          </BarChart>
+        </Card>
       </div>
     </DashboardLayout>
   );
