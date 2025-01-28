@@ -7,6 +7,7 @@ import OutgoingCommunications from "./pages/OutgoingCommunications";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import TelegramMessages from "./pages/TelegramMessages";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/outgoing-communications" element={<OutgoingCommunications />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/telegram-messages" element={<TelegramMessages />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
