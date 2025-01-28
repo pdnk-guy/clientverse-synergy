@@ -608,7 +608,7 @@ export {
   SidebarMenuAction,
   SidebarMenuBadge,
   SidebarMenuItem,
-  SidebarMenuButton, // Added this export
+  SidebarMenuButton,
   SidebarMenuSkeleton,
   SidebarMenuSub,
   SidebarMenuSubButton,
