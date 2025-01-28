@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </Link>
           <Link to="/customer" className="flex items-center gap-2 text-sm hover:text-primary">
             <UserSquare2 className="h-4 w-4" />
-            <span>Customer Card</span>
+            <span>Карточка клиента</span>
           </Link>
           <Link to="/incoming-call" className="flex items-center gap-2 text-sm hover:text-primary">
             <PhoneCall className="h-4 w-4" />
