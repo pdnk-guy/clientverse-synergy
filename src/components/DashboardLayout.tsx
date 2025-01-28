@@ -6,7 +6,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="min-h-screen">
       <header className="border-b bg-background">
         <div className="p-4">
-          <h1 className="text-2xl font-bold">Communication Hub</h1>
+          <h1 className="text-2xl font-bold">Панель оператора</h1>
         </div>
         <nav className="flex items-center gap-6 px-4 pb-2">
           <Link to="/" className="flex items-center gap-2 text-sm hover:text-primary">
