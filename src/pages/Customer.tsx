@@ -7,9 +7,9 @@ const Customer = () => {
   const [selectedFilter, setSelectedFilter] = useState("all");
 
   const customerHistory = [
-    { type: "call", date: "2024-02-20", description: "Scheduled maintenance inquiry" },
-    { type: "visit", date: "2024-02-15", description: "Oil change service" },
-    { type: "work", date: "2024-02-10", description: "Brake pad replacement" },
+    { type: "call", date: "2024-02-20", description: "Запрос на плановое обслуживание" },
+    { type: "visit", date: "2024-02-15", description: "Замена масла" },
+    { type: "work", date: "2024-02-10", description: "Замена тормозных колодок" },
   ];
 
   const filteredHistory = selectedFilter === "all" 
@@ -24,21 +24,21 @@ const Customer = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <User className="h-5 w-5" />
-              Personal Information
+              Личная информация
             </CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="flex items-center gap-2">
               <User className="h-4 w-4 text-muted-foreground" />
-              <span>John Doe</span>
+              <span>Иван Иванов</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone className="h-4 w-4 text-muted-foreground" />
-              <span>+1 234 567 8900</span>
+              <span>+7 123 456 7890</span>
             </div>
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-muted-foreground" />
-              <span>john.doe@example.com</span>
+              <span>ivan.ivanov@example.com</span>
             </div>
           </CardContent>
         </Card>
@@ -48,7 +48,7 @@ const Customer = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Clock className="h-5 w-5" />
-              History
+              История
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -59,7 +59,7 @@ const Customer = () => {
                   selectedFilter === "all" ? "bg-primary text-primary-foreground" : "bg-secondary"
                 }`}
               >
-                All
+                Все
               </button>
               <button
                 onClick={() => setSelectedFilter("call")}
@@ -67,7 +67,7 @@ const Customer = () => {
                   selectedFilter === "call" ? "bg-primary text-primary-foreground" : "bg-secondary"
                 }`}
               >
-                Calls
+                Звонки
               </button>
               <button
                 onClick={() => setSelectedFilter("visit")}
@@ -75,7 +75,7 @@ const Customer = () => {
                   selectedFilter === "visit" ? "bg-primary text-primary-foreground" : "bg-secondary"
                 }`}
               >
-                Visits
+                Визиты
               </button>
               <button
                 onClick={() => setSelectedFilter("work")}
@@ -83,7 +83,7 @@ const Customer = () => {
                   selectedFilter === "work" ? "bg-primary text-primary-foreground" : "bg-secondary"
                 }`}
               >
-                Work
+                Работы
               </button>
             </div>
             <div className="space-y-4">
@@ -105,31 +105,31 @@ const Customer = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Car className="h-5 w-5" />
-              Vehicle Information
+              Информация об автомобиле
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
               <div className="text-sm text-muted-foreground">VIN</div>
               <div>1HGCM82633A123456</div>
-              <div className="text-sm text-muted-foreground mt-4">License Plate</div>
-              <div>ABC 123</div>
-              <div className="text-sm text-muted-foreground mt-4">Mileage</div>
-              <div>45,678 miles</div>
+              <div className="text-sm text-muted-foreground mt-4">Гос. номер</div>
+              <div>А123БВ777</div>
+              <div className="text-sm text-muted-foreground mt-4">Пробег</div>
+              <div>73,500 км</div>
             </div>
 
             <div className="border-t pt-6">
               <div className="flex items-center gap-2 mb-4">
                 <MessageSquare className="h-5 w-5" />
-                <h3 className="font-semibold">Customer Reviews</h3>
+                <h3 className="font-semibold">Отзывы клиента</h3>
               </div>
               <div className="space-y-4">
                 <div className="p-3 bg-secondary/50 rounded-lg">
-                  <div className="text-sm">Great service! Very professional team.</div>
+                  <div className="text-sm">Отличный сервис! Очень профессиональная команда.</div>
                   <div className="text-xs text-muted-foreground mt-1">2024-02-15</div>
                 </div>
                 <div className="p-3 bg-secondary/50 rounded-lg">
-                  <div className="text-sm">Quick and efficient maintenance work.</div>
+                  <div className="text-sm">Быстрое и качественное обслуживание.</div>
                   <div className="text-xs text-muted-foreground mt-1">2024-02-10</div>
                 </div>
               </div>
@@ -142,16 +142,16 @@ const Customer = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Gift className="h-5 w-5" />
-              Personalized Offers
+              Персональные предложения
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[1, 2, 3].map((offer) => (
                 <div key={offer} className="p-4 bg-secondary/50 rounded-lg">
-                  <h4 className="font-medium mb-2">Special Offer #{offer}</h4>
+                  <h4 className="font-medium mb-2">Специальное предложение #{offer}</h4>
                   <p className="text-sm text-muted-foreground">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Выгодное предложение на обслуживание вашего автомобиля.
                   </p>
                 </div>
               ))}
