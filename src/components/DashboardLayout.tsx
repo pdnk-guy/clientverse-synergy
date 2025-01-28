@@ -31,7 +31,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </Link>
           <Link to="/settings" className="flex items-center gap-2 text-sm hover:text-primary">
             <Settings2 className="h-4 w-4" />
-            <span>Settings</span>
+            <span>настройка оператора</span>
           </Link>
         </nav>
       </header>
