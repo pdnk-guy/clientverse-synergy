@@ -1,20 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Phone, Clock, UserSquare2, PhoneOff, PhoneForwarded, ArrowLeft } from "lucide-react";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { CallsList } from "@/components/phone/CallsList";
+import { ScriptsPanel } from "@/components/phone/ScriptsPanel";
 
 interface Call {
   id: string;
@@ -89,36 +79,6 @@ const mockClient: Client = {
   ]
 };
 
-const getStatusColor = (status: Call["status"]) => {
-  switch (status) {
-    case "missed":
-      return "bg-red-500";
-    case "answered":
-      return "bg-green-500";
-    case "ongoing":
-      return "bg-blue-500";
-    case "waiting":
-      return "bg-yellow-500";
-    default:
-      return "bg-gray-500";
-  }
-};
-
-const getStatusIcon = (status: Call["status"]) => {
-  switch (status) {
-    case "missed":
-      return <PhoneOff className="h-4 w-4" />;
-    case "answered":
-      return <Phone className="h-4 w-4" />;
-    case "ongoing":
-      return <PhoneForwarded className="h-4 w-4" />;
-    case "waiting":
-      return <Clock className="h-4 w-4" />;
-    default:
-      return <Phone className="h-4 w-4" />;
-  }
-};
-
 const PhoneCalls = () => {
   const navigate = useNavigate();
   const [selectedCall, setSelectedCall] = useState<Call | null>(mockCalls[0]);
@@ -137,49 +97,12 @@ const PhoneCalls = () => {
         </Button>
       </div>
       <div className="grid grid-cols-12 gap-4 h-[calc(100vh-8rem)]">
-        {/* Left Column - Call List */}
-        <Card className="col-span-3 p-4">
-          <h2 className="text-lg font-semibold mb-4">Входящие звонки</h2>
-          <ScrollArea className="h-[calc(100vh-12rem)]">
-            <div className="space-y-2">
-              {mockCalls.map((call) => (
-                <div
-                  key={call.id}
-                  className={`p-3 rounded-lg cursor-pointer hover:bg-accent ${
-                    selectedCall?.id === call.id ? "bg-accent" : ""
-                  }`}
-                  onClick={() => setSelectedCall(call)}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium">{call.clientName}</span>
-                    <Badge variant="secondary" className={`${getStatusColor(call.status)} text-white`}>
-                      {getStatusIcon(call.status)}
-                    </Badge>
-                  </div>
-                  <div className="text-sm text-muted-foreground">{call.topic}</div>
-                  <div className="text-sm text-muted-foreground">{call.time}</div>
-                </div>
-              ))}
-            </div>
-          </ScrollArea>
-        </Card>
-
-        {/* Middle Column - Scripts */}
-        <Card className="col-span-6 p-4">
-          <h2 className="text-lg font-semibold mb-4">Скрипты диалога</h2>
-          <ScrollArea className="h-[calc(100vh-12rem)]">
-            <div className="space-y-4">
-              {mockScripts.map((script, index) => (
-                <div key={index} className="p-4 rounded-lg border">
-                  <h3 className="font-medium mb-2">{script.title}</h3>
-                  <p className="text-sm text-muted-foreground">{script.text}</p>
-                </div>
-              ))}
-            </div>
-          </ScrollArea>
-        </Card>
-
-        {/* Right Column - Client Info */}
+        <CallsList 
+          calls={mockCalls}
+          selectedCall={selectedCall}
+          onCallSelect={setSelectedCall}
+        />
+        <ScriptsPanel scripts={mockScripts} />
         <Card className="col-span-3 p-4">
           <h2 className="text-lg font-semibold mb-4">Информация о клиенте</h2>
           <ScrollArea className="h-[calc(100vh-12rem)]">
