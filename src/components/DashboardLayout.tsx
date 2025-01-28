@@ -23,7 +23,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </Link>
           <Link to="/outgoing-communications" className="flex items-center gap-2 text-sm hover:text-primary">
             <PhoneOutgoing className="h-4 w-4" />
-            <span>Outgoing Communications</span>
+            <span>Исходящие коммуникации</span>
           </Link>
           <Link to="/analytics" className="flex items-center gap-2 text-sm hover:text-primary">
             <BarChart className="h-4 w-4" />
