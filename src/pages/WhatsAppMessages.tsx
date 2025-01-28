@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Smile, Paperclip, Mic, Send } from "lucide-react";
+import { Smile, Paperclip, Mic, Send, ArrowLeft } from "lucide-react";
 
 interface Message {
   id: number;
@@ -53,11 +54,22 @@ const mockMessages: Message[] = [
 ];
 
 const WhatsAppMessages = () => {
+  const navigate = useNavigate();
   const [selectedClient, setSelectedClient] = useState<Client | null>(mockClients[0]);
   const [newMessage, setNewMessage] = useState("");
 
   return (
     <DashboardLayout>
+      <div className="mb-4">
+        <Button 
+          variant="ghost" 
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Назад
+        </Button>
+      </div>
       <div className="grid grid-cols-12 gap-4 h-[calc(100vh-120px)]">
         {/* Список обращений */}
         <div className="col-span-3 bg-white rounded-lg shadow overflow-y-auto dark:bg-gray-800">

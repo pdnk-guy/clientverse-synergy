@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Phone, Clock, UserSquare2, PhoneOff, PhoneForwarded } from "lucide-react";
+import { Phone, Clock, UserSquare2, PhoneOff, PhoneForwarded, ArrowLeft } from "lucide-react";
 import {
   Drawer,
   DrawerClose,
@@ -119,11 +120,22 @@ const getStatusIcon = (status: Call["status"]) => {
 };
 
 const PhoneCalls = () => {
+  const navigate = useNavigate();
   const [selectedCall, setSelectedCall] = useState<Call | null>(mockCalls[0]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
     <DashboardLayout>
+      <div className="mb-4">
+        <Button 
+          variant="ghost" 
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Назад
+        </Button>
+      </div>
       <div className="grid grid-cols-12 gap-4 h-[calc(100vh-8rem)]">
         {/* Left Column - Call List */}
         <Card className="col-span-3 p-4">

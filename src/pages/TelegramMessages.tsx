@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { MessageSquare, Calendar, User, Check, Filter, FileText, RefreshCcw, Tag } from "lucide-react";
+import { MessageSquare, Calendar, User, Check, Filter, FileText, RefreshCcw, Tag, ArrowLeft } from "lucide-react";
 import { MessageInput } from "@/components/MessageInput";
 import { ChatMessages } from "@/components/ChatMessages";
 
@@ -86,6 +87,7 @@ const mockChatMessages = [
 ];
 
 const TelegramMessages = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -97,6 +99,16 @@ const TelegramMessages = () => {
 
   return (
     <DashboardLayout>
+      <div className="mb-4">
+        <Button 
+          variant="ghost" 
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Назад
+        </Button>
+      </div>
       <div className="grid grid-cols-12 gap-4 h-[calc(100vh-120px)]">
         {/* Top filter panel */}
         <div className="col-span-12 bg-white rounded-lg shadow p-4 flex items-center justify-between">
