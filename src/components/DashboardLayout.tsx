@@ -1,4 +1,4 @@
-import { Menu, UserSquare2 } from "lucide-react";
+import { Menu, UserSquare2, PhoneCall } from "lucide-react";
 import { SidebarProvider, SidebarTrigger, Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -24,6 +24,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                       <a href="/customer">
                         <UserSquare2 className="h-4 w-4" />
                         <span>Customer Card</span>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <a href="/incoming-call">
+                        <PhoneCall className="h-4 w-4" />
+                        <span>Incoming Call</span>
                       </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
