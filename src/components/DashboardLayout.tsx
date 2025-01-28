@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </Link>
           <Link to="/incoming-call" className="flex items-center gap-2 text-sm hover:text-primary">
             <PhoneCall className="h-4 w-4" />
-            <span>Incoming Call</span>
+            <span>Входящие звонки</span>
           </Link>
           <Link to="/outgoing-communications" className="flex items-center gap-2 text-sm hover:text-primary">
             <PhoneOutgoing className="h-4 w-4" />
