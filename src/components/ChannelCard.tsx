@@ -51,6 +51,8 @@ const ChannelCard = ({ title, type, activeChats, responseTime }: ChannelCardProp
   const handleClick = () => {
     if (type === "telegram") {
       navigate("/telegram-messages");
+    } else if (type === "whatsapp") {
+      navigate("/whatsapp-messages");
     }
   };
 
