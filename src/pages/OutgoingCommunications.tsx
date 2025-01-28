@@ -20,6 +20,8 @@ import { Phone, MessageSquare, Calendar } from "lucide-react";
 import TaskForm from "@/components/TaskForm";
 import TaskList from "@/components/TaskList";
 import { useToast } from "@/hooks/use-toast";
+import ServiceCalculator from "@/components/ServiceCalculator";
+import DealershipCalendar from "@/components/DealershipCalendar";
 
 interface Task {
   id: string;
@@ -180,6 +182,11 @@ const OutgoingCommunications = () => {
             <TaskForm onSubmit={handleCreateTask} />
           </CardContent>
         </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <ServiceCalculator />
+          <DealershipCalendar />
+        </div>
       </div>
     </DashboardLayout>
   );
