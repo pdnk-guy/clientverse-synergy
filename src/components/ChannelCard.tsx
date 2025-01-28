@@ -35,7 +35,7 @@ const ChannelCard = ({ title, type, activeChats, responseTime }: ChannelCardProp
       <CardContent>
         <div className="text-2xl font-bold">{activeChats}</div>
         <p className="text-xs text-muted-foreground">
-          Avg. response time: {responseTime}
+          Среднее время ответа: {responseTime}
         </p>
       </CardContent>
     </Card>
