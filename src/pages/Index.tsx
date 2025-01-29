@@ -63,7 +63,6 @@ const Index = () => {
 
   const handleTaskStatusChange = (taskId: string) => {
     console.log("Task status changed:", taskId);
-    // Here you would typically update the task status in your state management system
   };
 
   return (
@@ -80,25 +79,16 @@ const Index = () => {
         ))}
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        <div className="md:col-span-2">
-          <div className="flex gap-4">
-            <div className="w-64">
-              <RequestFilters />
-            </div>
-            <div className="flex-1">
-              <RequestList />
-            </div>
-            <div className="w-64">
-              <QuickActions />
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-6">
+      <div className="grid grid-cols-12 gap-6">
+        {/* Left column - empty for now */}
+        <div className="col-span-3">
           <div className="border rounded-lg overflow-hidden">
             <WorkloadIndicator />
           </div>
+        </div>
+
+        {/* Middle column - Tasks */}
+        <div className="col-span-4">
           <div className="border rounded-lg p-4">
             <h2 className="text-lg font-semibold mb-4">Задачи на сегодня</h2>
             <TaskList
@@ -106,6 +96,18 @@ const Index = () => {
               onStatusChange={handleTaskStatusChange}
               type="today"
             />
+          </div>
+        </div>
+
+        {/* Right column - Request List and Quick Actions */}
+        <div className="col-span-5">
+          <div className="space-y-6">
+            <div className="border rounded-lg">
+              <RequestList />
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <QuickActions />
+            </div>
           </div>
         </div>
       </div>
