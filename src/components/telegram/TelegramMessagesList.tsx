@@ -18,11 +18,11 @@ interface TelegramMessagesListProps {
 
 export const TelegramMessagesList = ({ messages, onMessageClick }: TelegramMessagesListProps) => {
   return (
-    <div className="mt-4 flex flex-wrap gap-4">
+    <div className="grid grid-cols-12 gap-4">
       {messages.map((message) => (
         <div
           key={message.id}
-          className="w-[calc(33.33%-1rem)] p-4 border rounded-lg cursor-pointer hover:bg-[#1EAEDB]/10 bg-[#1EAEDB]/5"
+          className="col-span-4 p-4 border rounded-lg cursor-pointer hover:bg-[#1EAEDB]/10 bg-[#1EAEDB]/5"
           onClick={() => onMessageClick(message)}
         >
           <div className="flex justify-between items-start mb-2">
@@ -33,6 +33,11 @@ export const TelegramMessagesList = ({ messages, onMessageClick }: TelegramMessa
             <div className="flex items-center gap-1">
               <span className="text-orange-500">{message.messageCount}</span>
             </div>
+          </div>
+
+          <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+            <Calendar className="h-4 w-4" />
+            <span>{message.date}</span>
           </div>
 
           <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
