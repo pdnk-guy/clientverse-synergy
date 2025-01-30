@@ -10,7 +10,7 @@ const QuickActions = () => {
       </Button>
       <Button className="w-full justify-start" variant="outline">
         <Share2 className="mr-2 h-4 w-4" />
-        Передать в группу
+        Переключить
       </Button>
       <Button className="w-full justify-start" variant="outline">
         <XCircle className="mr-2 h-4 w-4" />

@@ -1,4 +1,4 @@
-import { MessageSquare, Phone, Send, Globe, Clock } from "lucide-react";
+import { MessageSquare, Phone, Send, Globe } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const requests = [
@@ -6,21 +6,18 @@ const requests = [
     id: 1,
     source: "telegram",
     status: "new",
-    time: "10:30",
     description: "Нужна помощь с доступом к аккаунту",
   },
   {
     id: 2,
     source: "whatsapp",
     status: "in-progress",
-    time: "11:15",
     description: "Вопрос о продлении подписки",
   },
   {
     id: 3,
     source: "phone",
     status: "new",
-    time: "11:45",
     description: "Требуется техническая поддержка",
   },
 ];
@@ -58,7 +55,6 @@ const RequestList = () => {
           <TableRow>
             <TableHead>Источник</TableHead>
             <TableHead>Статус</TableHead>
-            <TableHead>Время</TableHead>
             <TableHead>Описание</TableHead>
           </TableRow>
         </TableHeader>
@@ -72,12 +68,6 @@ const RequestList = () => {
                 </div>
               </TableCell>
               <TableCell>{getStatusBadge(request.status)}</TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-gray-500" />
-                  {request.time}
-                </div>
-              </TableCell>
               <TableCell>{request.description}</TableCell>
             </TableRow>
           ))}
