@@ -49,7 +49,7 @@ const getStatusBadge = (status: string) => {
 
 const RequestList = () => {
   return (
-    <div className="p-4">
+    <div className="p-4 w-[105%]">
       <Table>
         <TableHeader>
           <TableRow>
