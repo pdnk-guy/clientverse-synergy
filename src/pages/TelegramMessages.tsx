@@ -157,12 +157,14 @@ const TelegramMessages = () => {
           Назад
         </Button>
       </div>
-      <div className="grid grid-cols-12 gap-4 h-[calc(100vh-120px)]">
-        <TelegramFilterPanel 
-          searchQuery={searchQuery}
-          onSearchChange={(value) => setSearchQuery(value)}
-        />
-        <div className="col-span-12 bg-white rounded-lg shadow">
+      <div className="grid grid-cols-12 gap-4">
+        <div className="col-span-12">
+          <TelegramFilterPanel 
+            searchQuery={searchQuery}
+            onSearchChange={(value) => setSearchQuery(value)}
+          />
+        </div>
+        <div className="col-span-12">
           <TelegramMessagesList 
             messages={mockMessages}
             onMessageClick={handleMessageClick}
