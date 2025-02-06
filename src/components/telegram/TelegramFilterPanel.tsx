@@ -11,9 +11,6 @@ export const TelegramFilterPanel = ({ searchQuery, onSearchChange }: TelegramFil
   return (
     <div className="bg-white rounded-lg shadow p-4 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        <span className="text-sm text-gray-600">
-          Дата отправки сообщения: последние 7 дней
-        </span>
       </div>
       <div className="flex items-center gap-4">
         <Input

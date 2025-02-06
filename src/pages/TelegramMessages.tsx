@@ -59,6 +59,54 @@ const mockMessages: Message[] = [
     content: "Черри k769pp799",
     messageCount: 9,
     status: "Диалог №256464 завершён"
+  },
+  {
+    id: 4,
+    date: "28.01.2025",
+    sender: "Иван Сидоров",
+    recipient: "Еремина Алена (eremina_a)",
+    content: "Нужна консультация по BMW X5",
+    messageCount: 5
+  },
+  {
+    id: 5,
+    date: "28.01.2025",
+    sender: "Мария Петрова",
+    recipient: "Еремина Алена (eremina_a)",
+    content: "Вопрос по обслуживанию",
+    messageCount: 3
+  },
+  {
+    id: 6,
+    date: "28.01.2025",
+    sender: "Дмитрий Волков",
+    recipient: "Еремина Алена (eremina_a)",
+    content: "Интересует стоимость ТО",
+    messageCount: 7
+  },
+  {
+    id: 7,
+    date: "29.01.2025",
+    sender: "Анна Соколова",
+    recipient: "Еремина Алена (eremina_a)",
+    content: "Когда можно записаться?",
+    messageCount: 4
+  },
+  {
+    id: 8,
+    date: "29.01.2025",
+    sender: "Павел Морозов",
+    recipient: "Еремина Алена (eremina_a)",
+    content: "Нужна диагностика",
+    messageCount: 6
+  },
+  {
+    id: 9,
+    date: "29.01.2025",
+    sender: "Елена Кузнецова",
+    recipient: "Еремина Алена (eremina_a)",
+    content: "Вопрос по замене масла",
+    messageCount: 2
   }
 ];
 
