@@ -5,6 +5,8 @@ import RequestList from "@/components/RequestList";
 import QuickActions from "@/components/QuickActions";
 import TaskList from "@/components/TaskList";
 import WorkloadIndicator from "@/components/WorkloadIndicator";
+import OperatorComparisonChart from "@/components/OperatorComparisonChart";
+import CommunicationsSourceChart from "@/components/CommunicationsSourceChart";
 
 const Index = () => {
   const channels = [
@@ -80,14 +82,14 @@ const Index = () => {
       </div>
 
       <div className="grid grid-cols-12 gap-6">
-        {/* Left column - empty for now */}
         <div className="col-span-3">
           <div className="border rounded-lg overflow-hidden">
             <WorkloadIndicator />
+            <OperatorComparisonChart />
+            <CommunicationsSourceChart />
           </div>
         </div>
 
-        {/* Middle column - Tasks */}
         <div className="col-span-4">
           <div className="border rounded-lg p-4">
             <h2 className="text-lg font-semibold mb-4">Задачи на сегодня</h2>
@@ -99,7 +101,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Right column - Request List and Quick Actions */}
         <div className="col-span-5">
           <div className="space-y-6">
             <div className="border rounded-lg">
