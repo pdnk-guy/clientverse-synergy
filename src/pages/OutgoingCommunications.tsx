@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Phone, MessageSquare, Calendar, List, Send, Mail, BrandTelegram } from "lucide-react";
+import { Phone, MessageSquare, Calendar, List, Send, Mail } from "lucide-react";
 import TaskForm from "@/components/TaskForm";
 import TaskList from "@/components/TaskList";
 import { useToast } from "@/hooks/use-toast";
