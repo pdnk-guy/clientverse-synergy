@@ -5,6 +5,9 @@ import { TopEmployees } from "@/components/analytics/TopEmployees";
 import { PerformanceCharts } from "@/components/analytics/PerformanceCharts";
 import { KeyMetrics } from "@/components/analytics/KeyMetrics";
 import { AnalyticsFilters } from "@/components/analytics/AnalyticsFilters";
+import WorkloadIndicator from "@/components/WorkloadIndicator";
+import OperatorComparisonChart from "@/components/OperatorComparisonChart";
+import CommunicationsSourceChart from "@/components/CommunicationsSourceChart";
 
 const Analytics = () => {
   const [timeFilter, setTimeFilter] = useState("7d");
@@ -69,6 +72,18 @@ const Analytics = () => {
         
         <KeyMetrics />
         
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="border rounded-lg overflow-hidden">
+            <WorkloadIndicator />
+          </div>
+          <div className="border rounded-lg overflow-hidden">
+            <OperatorComparisonChart />
+          </div>
+          <div className="border rounded-lg overflow-hidden">
+            <CommunicationsSourceChart />
+          </div>
+        </div>
+
         <PerformanceCharts
           performanceData={performanceData}
           employeePerformance={employeePerformance}
