@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -16,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Phone, MessageSquare, Calendar, List } from "lucide-react";
+import { Phone, MessageSquare, Calendar, List, Send, Mail, BrandTelegram } from "lucide-react";
 import TaskForm from "@/components/TaskForm";
 import TaskList from "@/components/TaskList";
 import { useToast } from "@/hooks/use-toast";
@@ -50,6 +51,8 @@ interface CallListItem {
   location: string;
   callPurpose: string;
   comment: string;
+  confirmationSent: boolean;
+  confirmed: boolean;
 }
 
 const OutgoingCommunications = () => {
@@ -70,7 +73,6 @@ const OutgoingCommunications = () => {
       status: "pending",
     };
     setTasks((prev) => [...prev, newTask]);
-    console.log("Создана новая задача:", newTask);
   };
 
   const handleTaskStatusChange = (taskId: string) => {
@@ -92,11 +94,9 @@ const OutgoingCommunications = () => {
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
-    console.log("Фильтры обновлены:", { ...filters, [key]: value });
   };
 
   const generateCallList = () => {
-    // В реальном приложении здесь будет API запрос
     const mockCallList: CallListItem[] = [
       {
         id: "1",
@@ -106,6 +106,8 @@ const OutgoingCommunications = () => {
         location: "МКАД 23",
         callPurpose: "Напоминание о ТО",
         comment: "",
+        confirmationSent: false,
+        confirmed: false
       },
       {
         id: "2",
@@ -115,16 +117,9 @@ const OutgoingCommunications = () => {
         location: "Внуково",
         callPurpose: "Предложение доп.услуг",
         comment: "",
-      },
-      {
-        id: "3",
-        customerName: "Сидоров Сидор",
-        carMake: "Mercedes",
-        carModel: "E-class",
-        location: "Ярославка",
-        callPurpose: "Обратная связь после ТО",
-        comment: "",
-      },
+        confirmationSent: false,
+        confirmed: false
+      }
     ];
     setCallList(mockCallList);
     setSelectedDate(new Date().toISOString().split('T')[0]);
@@ -134,12 +129,28 @@ const OutgoingCommunications = () => {
     });
   };
 
-  const handleCommentChange = (id: string, comment: string) => {
+  const handleSendReminders = (id: string) => {
     setCallList(prevList =>
       prevList.map(item =>
-        item.id === id ? { ...item, comment } : item
+        item.id === id ? { ...item, confirmationSent: true } : item
       )
     );
+    toast({
+      title: "Напоминания Отправлены",
+      description: "Напоминания успешно отправлены клиенту",
+    });
+  };
+
+  const handleConfirmation = (id: string) => {
+    setCallList(prevList =>
+      prevList.map(item =>
+        item.id === id ? { ...item, confirmed: true } : item
+      )
+    );
+    toast({
+      title: "Запись Подтверждена",
+      description: "Клиент подтвердил запись",
+    });
   };
 
   return (
@@ -266,6 +277,7 @@ const OutgoingCommunications = () => {
                         <TableHead>Автомобиль</TableHead>
                         <TableHead>Локация</TableHead>
                         <TableHead>Цель Звонка</TableHead>
+                        <TableHead>Действия</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -275,6 +287,27 @@ const OutgoingCommunications = () => {
                           <TableCell>{item.carMake} {item.carModel}</TableCell>
                           <TableCell>{item.location}</TableCell>
                           <TableCell>{item.callPurpose}</TableCell>
+                          <TableCell>
+                            <div className="flex gap-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleSendReminders(item.id)}
+                                disabled={item.confirmationSent}
+                              >
+                                <Send className="h-4 w-4 mr-1" />
+                                Отправить напоминания
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleConfirmation(item.id)}
+                                disabled={item.confirmed || !item.confirmationSent}
+                              >
+                                {item.confirmed ? "Подтверждено" : "Ожидает подтверждения"}
+                              </Button>
+                            </div>
+                          </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -288,7 +321,15 @@ const OutgoingCommunications = () => {
                         <Textarea
                           placeholder="Добавить комментарий"
                           value={item.comment}
-                          onChange={(e) => handleCommentChange(item.id, e.target.value)}
+                          onChange={(e) => {
+                            setCallList(prevList =>
+                              prevList.map(listItem =>
+                                listItem.id === item.id
+                                  ? { ...listItem, comment: e.target.value }
+                                  : listItem
+                              )
+                            );
+                          }}
                           className="h-24"
                         />
                       </div>
