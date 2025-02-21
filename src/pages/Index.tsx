@@ -1,3 +1,4 @@
+
 import DashboardLayout from "@/components/DashboardLayout";
 import ChannelCard from "@/components/ChannelCard";
 import RequestFilters from "@/components/RequestFilters";
@@ -7,6 +8,8 @@ import TaskList from "@/components/TaskList";
 import WorkloadIndicator from "@/components/WorkloadIndicator";
 import OperatorComparisonChart from "@/components/OperatorComparisonChart";
 import CommunicationsSourceChart from "@/components/CommunicationsSourceChart";
+import KeyPerformanceIndicators from "@/components/KeyPerformanceIndicators";
+import AutomatedTaskChecklist from "@/components/AutomatedTaskChecklist";
 
 const Index = () => {
   const channels = [
@@ -69,6 +72,8 @@ const Index = () => {
 
   return (
     <DashboardLayout>
+      <KeyPerformanceIndicators />
+      
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
         {channels.map((channel) => (
           <ChannelCard
@@ -91,13 +96,16 @@ const Index = () => {
         </div>
 
         <div className="col-span-4">
-          <div className="border rounded-lg p-4">
-            <h2 className="text-lg font-semibold mb-4">Задачи на сегодня</h2>
-            <TaskList
-              tasks={todaysTasks}
-              onStatusChange={handleTaskStatusChange}
-              type="today"
-            />
+          <div className="space-y-6">
+            <div className="border rounded-lg p-4">
+              <h2 className="text-lg font-semibold mb-4">Задачи на сегодня</h2>
+              <TaskList
+                tasks={todaysTasks}
+                onStatusChange={handleTaskStatusChange}
+                type="today"
+              />
+            </div>
+            <AutomatedTaskChecklist />
           </div>
         </div>
 

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { TopEmployees } from "@/components/analytics/TopEmployees";
@@ -19,10 +20,10 @@ const Analytics = () => {
   ];
 
   const employeePerformance = [
-    { name: 'Иван', score: 95, color: '#1EAEDB' },
-    { name: 'Мария', score: 88, color: '#9b87f5' },
-    { name: 'Михаил', score: 75, color: '#FEC6A1' },
-    { name: 'Елена', score: 92, color: '#1EAEDB' },
+    { name: 'Иван', score: 95, color: '#1EAEDB', quality: 65 },
+    { name: 'Мария', score: 88, color: '#9b87f5', quality: 92 },
+    { name: 'Михаил', score: 75, color: '#FEC6A1', quality: 85 },
+    { name: 'Елена', score: 92, color: '#1EAEDB', quality: 78 },
   ];
 
   const topEmployees = [
