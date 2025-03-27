@@ -1,5 +1,7 @@
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "@/components/ui/toaster";
 import Index from "./pages/Index";
 import Customer from "./pages/Customer";
 import IncomingCall from "./pages/IncomingCall";
@@ -34,6 +36,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      <Toaster />
     </div>
   </QueryClientProvider>
 );
